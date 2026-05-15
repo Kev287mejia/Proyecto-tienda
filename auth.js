@@ -20,17 +20,34 @@ function handleLogin() {
     const email = document.getElementById('login-email').value.toLowerCase().trim();
     const btn = event.target;
     
-    // Simular carga
     btn.innerHTML = '<div class="spinner"></div>';
     btn.style.pointerEvents = 'none';
 
     setTimeout(() => {
+        // Simulación de perfiles según el correo
+        let profile = {
+            id: 'u-' + Math.random().toString(36).substr(2, 9),
+            email: email,
+            full_name: 'Usuario Demo',
+            phone: '+505 8888-8888',
+            avatar_url: 'https://ui-avatars.com/api/?name=Demo+User',
+            role: 'customer',
+            is_active: true,
+            created_at: new Date().toISOString()
+        };
+
         if (email === 'admin@eternallabs.com') {
+            profile.role = 'admin';
+            profile.full_name = 'Super Administrador';
+            localStorage.setItem('eternal_profile', JSON.stringify(profile));
             window.location.href = '../admin/';
         } else if (email === 'vendedor@tienda.com') {
+            profile.role = 'seller';
+            profile.full_name = 'Dueño de Negocio';
+            localStorage.setItem('eternal_profile', JSON.stringify(profile));
             window.location.href = '../seller/';
         } else {
-            // Usuario normal o cualquier otro
+            localStorage.setItem('eternal_profile', JSON.stringify(profile));
             window.location.href = '../';
         }
     }, 1200);
@@ -48,33 +65,46 @@ function selectType(type) {
     btn.style.opacity = '1';
     btn.style.pointerEvents = 'auto';
 
-    const clientFields = document.getElementById('fields-client');
     const businessFields = document.getElementById('fields-business');
-
     if (type === 'client') {
-        clientFields.classList.remove('hidden');
         businessFields.classList.add('hidden');
     } else {
-        clientFields.classList.add('hidden');
         businessFields.classList.remove('hidden');
     }
 }
 
 function handleSubmit() {
     const btn = event.target;
+    
+    // Captura de datos según esquema recomendado
+    const profile = {
+        id: 'u-' + Math.random().toString(36).substr(2, 9),
+        email: document.getElementById('reg-email').value,
+        full_name: document.getElementById('reg-name').value,
+        phone: document.getElementById('reg-phone').value,
+        avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(document.getElementById('reg-name').value)}`,
+        role: currentType === 'business' ? 'seller' : 'customer',
+        is_active: true,
+        created_at: new Date().toISOString(),
+        business_name: currentType === 'business' ? document.getElementById('reg-business-name').value : null,
+        city: currentType === 'business' ? document.getElementById('reg-city').value : null
+    };
+
     btn.innerHTML = '<div class="spinner"></div>';
     btn.style.pointerEvents = 'none';
 
     setTimeout(() => {
+        localStorage.setItem('eternal_profile', JSON.stringify(profile));
+        
         const successMsg = document.getElementById('success-message');
         const btnSuccess = document.querySelector('#view-success .btn-primary');
         
         if (currentType === 'business') {
-            successMsg.textContent = 'Tu cuenta de negocio ha sido creada. Ahora debes completar tu verificación para empezar a vender.';
-            btnSuccess.textContent = 'Ir al Panel de Control';
+            successMsg.textContent = `¡Hola ${profile.full_name}! Tu cuenta de negocio "${profile.business_name}" ha sido creada. Ahora debes completar tu verificación.`;
+            btnSuccess.textContent = 'Ir al Panel de Vendedor';
             btnSuccess.onclick = () => window.location.href = '../seller/';
         } else {
-            successMsg.textContent = 'Tu cuenta ha sido creada exitosamente. ¡Bienvenido al Caribe!';
+            successMsg.textContent = `¡Todo listo ${profile.full_name}! Tu cuenta ha sido creada exitosamente.`;
             btnSuccess.textContent = 'Ir al Marketplace';
             btnSuccess.onclick = () => window.location.href = '../';
         }
@@ -82,7 +112,7 @@ function handleSubmit() {
     }, 1500);
 }
 
-// Estilos globales de animaciones
+// Global Styles
 const style = document.createElement('style');
 style.innerHTML = `
 @keyframes fadeIn {
