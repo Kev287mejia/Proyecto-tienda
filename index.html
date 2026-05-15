@@ -22,7 +22,10 @@
         </div>
         <div class="nav-icons">
             <i data-lucide="heart"></i>
-            <i data-lucide="shopping-bag"></i>
+            <div class="cart-icon-wrapper" onclick="toggleCart()">
+                <i data-lucide="shopping-bag"></i>
+                <span id="cart-count" class="cart-badge">0</span>
+            </div>
             <i data-lucide="menu"></i>
         </div>
     </header>
@@ -236,6 +239,71 @@
             to { transform: translateY(0); opacity: 1; }
         }
         .modal-overlay.active { display: flex !important; }
+    </style>
+
+    <!-- Premium Side Cart -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button onclick="toggleCart()" class="close-cart"><i data-lucide="x"></i></button>
+        </div>
+        <div id="cart-items" class="cart-items-container">
+            <!-- Items will be injected here -->
+            <div class="empty-cart-msg">
+                <i data-lucide="shopping-cart" style="width: 48px; height: 48px; opacity: 0.2; margin-bottom: 20px;"></i>
+                <p>Tu carrito está vacío</p>
+                <button class="btn btn-outline" onclick="toggleCart()" style="margin-top: 20px;">Seguir comprando</button>
+            </div>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display: none;">
+            <div class="cart-total">
+                <span>Total estimado:</span>
+                <span id="cart-total-price">NIO 0</span>
+            </div>
+            <button class="btn btn-primary" onclick="processCheckout()" style="width: 100%; justify-content: center;">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="text-align: center; padding: 40px;">
+            <div style="width: 80px; height: 80px; background: rgba(16, 185, 129, 0.1); color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                <i data-lucide="check" style="width: 40px; height: 40px;"></i>
+            </div>
+            <h2 style="margin-bottom: 10px;">¡Pedido Recibido!</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Tu orden ha sido enviada al vendedor. Te contactarán pronto para la entrega.</p>
+            <button class="btn btn-primary" onclick="closeSuccess()" style="width: 100%; justify-content: center;">Genial, gracias</button>
+        </div>
+    </div>
+
+    <style>
+        .cart-drawer {
+            position: fixed;
+            top: 0; right: -400px;
+            width: 100%; max-width: 400px;
+            height: 100%;
+            background: white;
+            z-index: 2000;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-drawer.active { right: 0; }
+        .cart-header { padding: 24px; border-bottom: 1px solid #F1F5F9; display: flex; justify-content: space-between; align-items: center; }
+        .close-cart { background: none; border: none; cursor: pointer; color: var(--text-muted); }
+        .cart-items-container { flex: 1; overflow-y: auto; padding: 24px; }
+        .empty-cart-msg { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted); text-align: center; }
+        .cart-footer { padding: 24px; border-top: 1px solid #F1F5F9; background: #F8FAFC; }
+        .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-weight: 700; font-size: 1.1rem; }
+        .cart-badge { position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; border: 2px solid white; }
+        .cart-icon-wrapper { position: relative; cursor: pointer; }
+        
+        .cart-item-row { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #F1F5F9; }
+        .cart-item-img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; }
+        .cart-item-info { flex: 1; }
+        .cart-item-info h4 { margin: 0 0 4px; font-size: 0.9rem; }
+        .cart-item-info p { margin: 0; font-size: 0.8rem; color: var(--text-muted); }
     </style>
 
     <script src="script.js"></script>
