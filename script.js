@@ -23,6 +23,9 @@ function openProductDetail(title, price, seller, location, imgSrc) {
     currentQty = 1;
     document.getElementById('modal-qty').innerText = currentQty;
     
+    // Store original price for calculations
+    window.basePriceNum = parseInt(price.replace(/[^\d]/g, '')) || 0;
+    
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-price').innerText = price;
     document.getElementById('modal-seller').innerText = `por ${seller}`;
@@ -37,6 +40,10 @@ function openProductDetail(title, price, seller, location, imgSrc) {
 function changeQty(delta) {
     currentQty = Math.max(1, currentQty + delta);
     document.getElementById('modal-qty').innerText = currentQty;
+    
+    // Update price in modal dynamically
+    const newTotal = window.basePriceNum * currentQty;
+    document.getElementById('modal-price').innerText = `NIO ${newTotal.toLocaleString()}`;
 }
 
 function closeModal() {
