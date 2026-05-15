@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos | EternalLabs Seller</title>
+    <link rel="stylesheet" href="../../admin.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+                    <path d="M10 10V22H22V20H12V10H10Z" fill="white"/>
+                    <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#FF7E5F"/><stop offset="1" stop-color="#D4145A"/></linearGradient></defs>
+                </svg>
+                <span>EternalLabs</span>
+            </div>
+            <nav class="nav-group">
+                <a href="/seller/" class="nav-item"><i data-lucide="layout-grid"></i><span>Dashboard</span></a>
+                <a href="/seller/products/" class="nav-item active"><i data-lucide="package"></i><span>Productos</span></a>
+                <a href="/seller/orders/" class="nav-item"><i data-lucide="shopping-bag"></i><span>Pedidos</span></a>
+                <a href="/seller/inventory/" class="nav-item"><i data-lucide="database"></i><span>Inventario</span></a>
+                <a href="/seller/settings/" class="nav-item"><i data-lucide="store"></i><span>Perfil Tienda</span></a>
+                <a href="/seller/verification/" class="nav-item"><i data-lucide="shield-check"></i><span>Verificación</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/" class="nav-item"><i data-lucide="external-link"></i><span>Marketplace</span></a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div>
+                    <h1>Gestión de Productos</h1>
+                    <p style="color: var(--text-muted);">Administra tu catálogo de ventas en tiempo real.</p>
+                </div>
+                <button class="btn-admin btn-admin-primary" onclick="showProductForm()">
+                    <i data-lucide="plus"></i> Nuevo Producto
+                </button>
+            </div>
+            
+            <div class="content-card">
+                <table class="modern-table">
+                    <thead>
+                        <tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Estado</th><th>Acciones</th></tr>
+                    </thead>
+                    <tbody id="products-table-body">
+                        <!-- Inyectado por JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Product Form (Same modal/view logic) -->
+            <div id="product-form-view" style="display:none; margin-top: 40px;">
+                 <!-- ... Form content from main seller/index.html ... -->
+            </div>
+        </main>
+    </div>
+
+    <script src="../../admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
