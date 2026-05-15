@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master | Validaciones</title>
+    <link rel="stylesheet" href="../../super-admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/><path d="M10 10V22H22V20H12V10H10Z" fill="white"/>
+                <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#FF7E5F"/><stop offset="1" stop-color="#D4145A"/></linearGradient></defs>
+            </svg>
+            <span>EternalLabs MASTER</span>
+        </div>
+        <nav>
+            <a href="/admin/" class="nav-item">Dashboard</a>
+            <a href="/admin/verification/" class="nav-item active">Validaciones</a>
+            <a href="/admin/businesses/" class="nav-item">Negocios</a>
+            <a href="/admin/orders/" class="nav-item">Pedidos</a>
+            <a href="/admin/security/" class="nav-item">Seguridad</a>
+            <a href="/admin/payments/" class="nav-item">Pagos</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Centro de Validación de Seguridad</h1>
+            <p style="color: var(--text-muted);">Análisis de identidad y prevención de fraude para nuevos negocios.</p>
+        </div>
+
+        <div class="validation-grid" style="grid-template-columns: 1fr 380px; display: grid; gap: 24px;">
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+                <div class="doc-viewer" style="background: #0F172A; padding: 24px; border-radius: 20px; color: white;">
+                    <h3 style="margin-bottom: 20px;">Documentos Enviados</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <img src="../../mock_cedula_front_1778802267324.png" style="width: 100%; border-radius: 12px;" id="doc-cedula">
+                        <div style="aspect-ratio: 1.6; background: #1E293B; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.3);">
+                            RUC / MATRÍCULA
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 24px; border-radius: 20px; box-shadow: var(--shadow-sm);">
+                    <h3>Información del Propietario</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                        <div><label style="font-size: 0.7rem; color: var(--text-muted);">NOMBRE</label><p style="font-weight: 600;">Bayardo Porta</p></div>
+                        <div><label style="font-size: 0.7rem; color: var(--text-muted);">CIUDAD</label><p style="font-weight: 600;">Bluefields, NIC</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="validation-actions" style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="background: #0F172A; color: white; padding: 24px; border-radius: 20px;">
+                    <h4 style="font-size: 0.7rem; margin-bottom: 15px; opacity: 0.5;">CHECKLIST</h4>
+                    <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;"><input type="checkbox"> Cédula coincide</label>
+                    <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;"><input type="checkbox"> RUC vigente</label>
+                    <label style="display: flex; align-items: center; gap: 10px;"><input type="checkbox"> Foto real</label>
+                </div>
+                <button class="btn-action btn-approve" onclick="approveBusiness()" style="padding: 15px; border-radius: 12px; border: none; background: var(--success); color: white; font-weight: 700; cursor: pointer;">Aprobar Vendedor</button>
+                <button class="btn-action btn-reject" onclick="rejectBusiness()" style="padding: 15px; border-radius: 12px; border: none; background: var(--danger); color: white; font-weight: 700; cursor: pointer;">Rechazar / Pedir Notas</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast-container" class="toast-container"></div>
+    <script src="../../super-admin.js"></script>
+</body>
+</html>
