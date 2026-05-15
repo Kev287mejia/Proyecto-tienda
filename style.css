@@ -640,17 +640,34 @@ section {
 .badge-new { background: white; color: var(--text-main); }
 .badge-discount { background: var(--primary-gradient); color: white; }
 
-/* Custom Scrollbar for Premium Feel */
-::-webkit-scrollbar {
-    width: 8px;
+/* Premium Badge System */
+.cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: var(--primary-gradient);
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #FDFCF0; /* Matches body background */
+    box-shadow: 0 4px 10px rgba(212, 20, 90, 0.3);
 }
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
+
+.cart-icon-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
-::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #aaa;
-}
+
+/* Scrollbar and rest ... */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #aaa; }
