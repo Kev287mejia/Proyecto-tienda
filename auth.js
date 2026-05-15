@@ -8,7 +8,6 @@ function switchView(viewId) {
         if (el) {
             if (v === viewId) {
                 el.classList.remove('hidden');
-                // Simple entrance animation
                 el.style.animation = 'fadeIn 0.4s ease-out forwards';
             } else {
                 el.classList.add('hidden');
@@ -17,22 +16,38 @@ function switchView(viewId) {
     });
 }
 
+function handleLogin() {
+    const email = document.getElementById('login-email').value.toLowerCase().trim();
+    const btn = event.target;
+    
+    // Simular carga
+    btn.innerHTML = '<div class="spinner"></div>';
+    btn.style.pointerEvents = 'none';
+
+    setTimeout(() => {
+        if (email === 'admin@eternallabs.com') {
+            window.location.href = 'super-admin.html';
+        } else if (email === 'vendedor@tienda.com') {
+            window.location.href = 'admin.html';
+        } else {
+            // Usuario normal o cualquier otro
+            window.location.href = 'index.html';
+        }
+    }, 1200);
+}
+
 function selectType(type) {
     currentType = type;
     const cards = document.querySelectorAll('.type-card');
     const btn = document.getElementById('btn-continue');
 
     cards.forEach(card => card.classList.remove('selected'));
-    
-    // Find the clicked card
     const selectedCard = type === 'client' ? cards[0] : cards[1];
     selectedCard.classList.add('selected');
 
-    // Enable button
     btn.style.opacity = '1';
     btn.style.pointerEvents = 'auto';
 
-    // Update register form fields
     const clientFields = document.getElementById('fields-client');
     const businessFields = document.getElementById('fields-business');
 
@@ -47,9 +62,6 @@ function selectType(type) {
 
 function handleSubmit() {
     const btn = event.target;
-    const originalText = btn.innerHTML;
-    
-    // Loading State
     btn.innerHTML = '<div class="spinner"></div>';
     btn.style.pointerEvents = 'none';
 
@@ -70,7 +82,7 @@ function handleSubmit() {
     }, 1500);
 }
 
-// Add animation keyframe and spinner style
+// Estilos globales de animaciones
 const style = document.createElement('style');
 style.innerHTML = `
 @keyframes fadeIn {
@@ -81,12 +93,12 @@ style.innerHTML = `
     to { transform: rotate(360deg); }
 }
 .spinner {
-    width: 20px;
-    height: 20px;
+    width: 20px; height: 20px;
     border: 3px solid rgba(255,255,255,0.3);
     border-radius: 50%;
     border-top-color: #fff;
     animation: spin 0.8s linear infinite;
+    margin: 0 auto;
 }
 `;
 document.head.appendChild(style);
