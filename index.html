@@ -342,35 +342,6 @@
         </div>
     </div>
 
-    <style>
-        .cart-drawer {
-            position: fixed;
-            top: 0; right: -400px;
-            width: 100%; max-width: 400px;
-            height: 100%;
-            background: white;
-            z-index: 2000;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-        }
-        .cart-drawer.active { right: 0; }
-        .cart-header { padding: 24px; border-bottom: 1px solid #F1F5F9; display: flex; justify-content: space-between; align-items: center; }
-        .close-cart { background: none; border: none; cursor: pointer; color: var(--text-muted); }
-        .cart-items-container { flex: 1; overflow-y: auto; padding: 24px; }
-        .empty-cart-msg { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted); text-align: center; }
-        .cart-footer { padding: 24px; border-top: 1px solid #F1F5F9; background: #F8FAFC; }
-        .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-weight: 700; font-size: 1.1rem; }
-        .cart-badge { position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; border: 2px solid white; }
-        .cart-icon-wrapper { position: relative; cursor: pointer; }
-        
-        .cart-item-row { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #F1F5F9; }
-        .cart-item-img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; }
-        .cart-item-info { flex: 1; }
-        .cart-item-info h4 { margin: 0 0 4px; font-size: 0.9rem; }
-        .cart-item-info p { margin: 0; font-size: 0.8rem; color: var(--text-muted); }
-    </style>
 
     <script src="script.js"></script>
     <script>
