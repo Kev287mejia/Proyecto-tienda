@@ -26,12 +26,12 @@ function handleLogin() {
 
     setTimeout(() => {
         if (email === 'admin@eternallabs.com') {
-            window.location.href = 'super-admin.html';
+            window.location.href = '../admin/';
         } else if (email === 'vendedor@tienda.com') {
-            window.location.href = 'admin.html';
+            window.location.href = '../seller/';
         } else {
             // Usuario normal o cualquier otro
-            window.location.href = 'index.html';
+            window.location.href = '../';
         }
     }, 1200);
 }
@@ -72,11 +72,11 @@ function handleSubmit() {
         if (currentType === 'business') {
             successMsg.textContent = 'Tu cuenta de negocio ha sido creada. Ahora debes completar tu verificación para empezar a vender.';
             btnSuccess.textContent = 'Ir al Panel de Control';
-            btnSuccess.onclick = () => window.location.href = 'admin.html';
+            btnSuccess.onclick = () => window.location.href = '../seller/';
         } else {
             successMsg.textContent = 'Tu cuenta ha sido creada exitosamente. ¡Bienvenido al Caribe!';
             btnSuccess.textContent = 'Ir al Marketplace';
-            btnSuccess.onclick = () => window.location.href = 'index.html';
+            btnSuccess.onclick = () => window.location.href = '../';
         }
         switchView('success');
     }, 1500);
