@@ -137,14 +137,14 @@
         function renderProducts() {
             const grid = document.getElementById('product-grid');
             const prods = [
-                { id: 1, name: "Café Gourmet Caribe", price: 450, seller: "Granos de Oro", location: "Bluefields", image: "../caribbean_coffee_product_1778800497641.png" },
-                { id: 2, name: "Artesanía en Coco", price: 320, seller: "Artesanos Bilwi", location: "Bilwi", image: "../media__1778799917034.jpg" },
-                { id: 3, name: "Vestido Tropical", price: 950, seller: "Modas Maritza", location: "Bilwi", image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600" },
-                { id: 4, name: "Chocolate Orgánico", price: 180, seller: "Cacao del Sur", location: "Bluefields", image: "../media__1778800601810.jpg" }
+                { id: 1, name: "Café Gourmet Caribe", price: 450, seller: "Granos de Oro", location: "Bluefields", image: "/caribbean_coffee_product_1778800497641.png" },
+                { id: 2, name: "Artesanía en Coco", price: 320, seller: "Artesanos Bilwi", location: "Bilwi", image: "/media__1778799917034.jpg" },
+                { id: 3, name: "Vestido Tropical", price: 950, seller: "Modas Maritza", location: "Bilwi", image: "/media__1778800601810.jpg" },
+                { id: 4, name: "Chocolate Orgánico", price: 180, seller: "Cacao del Sur", location: "Bluefields", image: "/caribbean_hero_background_1778800043521.png" }
             ];
 
             grid.innerHTML = prods.map(p => `
-                <div class="product-card" onclick="window.location.href='../product/?name=${encodeURIComponent(p.name)}&price=${p.price}&seller=${encodeURIComponent(p.seller)}'">
+                <div class="product-card" onclick="window.location.href='/product/?name=${encodeURIComponent(p.name)}&price=${p.price}&seller=${encodeURIComponent(p.seller)}'">
                     <div class="product-img">
                         <img src="${p.image}">
                         <div class="badge badge-new">NUEVO</div>
