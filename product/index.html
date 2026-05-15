@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto | EternalLabs</title>
+    <link rel="stylesheet" href="../index.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .product-page { max-width: 1200px; margin: 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .product-gallery { position: sticky; top: 100px; }
+        .main-image { width: 100%; aspect-ratio: 1; border-radius: 32px; object-fit: cover; box-shadow: var(--shadow-lg); }
+        .product-details h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .product-price-tag { font-size: 2rem; font-weight: 800; color: var(--primary); margin: 20px 0; }
+        .seller-card { display: flex; align-items: center; gap: 15px; padding: 20px; border-radius: 20px; background: #f8fafc; border: 1px solid #e2e8f0; margin: 30px 0; }
+        .seller-logo { width: 50px; height: 50px; border-radius: 12px; background: white; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); box-shadow: var(--shadow-sm); }
+        
+        @media (max-width: 768px) { .product-page { grid-template-columns: 1fr; gap: 30px; } }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../" class="logo" style="text-decoration: none; color: inherit;">
+                <div class="logo-circle">E</div>
+                <span>Plataforma <span class="gradient-text">Caribe</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="../">Inicio</a>
+                <a href="../marketplace/">Marketplace</a>
+                <a href="../login/">Entrar</a>
+            </div>
+            <div class="nav-actions">
+                <div class="cart-icon-wrapper" onclick="toggleCart()">
+                    <i data-lucide="shopping-cart"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="product-page">
+        <div class="product-gallery">
+            <img src="../caribbean_coffee_product_1778800497641.png" class="main-image" id="p-image">
+        </div>
+        <div class="product-details">
+            <nav style="margin-bottom: 20px; font-size: 0.85rem; color: var(--text-muted);">
+                <a href="../marketplace/" style="color: inherit; text-decoration: none;">Marketplace</a> / 
+                <span id="p-category">Alimentos</span>
+            </nav>
+            <h1 id="p-name">Cargando...</h1>
+            <div id="p-rating" style="display: flex; gap: 5px; color: #fbbf24; margin-bottom: 20px;">
+                <i data-lucide="star" fill="currentColor"></i>
+                <i data-lucide="star" fill="currentColor"></i>
+                <i data-lucide="star" fill="currentColor"></i>
+                <i data-lucide="star" fill="currentColor"></i>
+                <i data-lucide="star"></i>
+                <span style="color: var(--text-muted); font-size: 0.9rem; margin-left: 5px;">(4.8 / 12 reseñas)</span>
+            </div>
+            <p id="p-desc" style="font-size: 1.1rem; line-height: 1.6; color: var(--text-main);">Un producto excepcional de la Costa Caribe, cultivado con amor y tradición.</p>
+            
+            <div class="product-price-tag" id="p-price">NIO 0</div>
+
+            <div class="seller-card">
+                <div class="seller-logo" id="s-logo">C</div>
+                <div>
+                    <h4 id="s-name" style="margin: 0;">Vendedor Demo</h4>
+                    <p id="s-location" style="margin: 4px 0 0; font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+                        <i data-lucide="map-pin" style="width: 14px;"></i> Bluefields
+                    </p>
+                </div>
+                <a id="s-link" href="#" style="margin-left: auto; color: var(--primary); font-weight: 700; text-decoration: none; font-size: 0.9rem;">Ver Tienda</a>
+            </div>
+
+            <div style="display: flex; gap: 20px; margin-top: 40px;">
+                <div style="display: flex; align-items: center; gap: 15px; background: #f1f5f9; padding: 10px 20px; border-radius: 15px;">
+                    <button onclick="changeQty(-1)" style="border:none; background:none; cursor:pointer; font-weight:700;">-</button>
+                    <span id="modal-qty" style="font-weight: 700; min-width: 20px; text-align: center;">1</span>
+                    <button onclick="changeQty(1)" style="border:none; background:none; cursor:pointer; font-weight:700;">+</button>
+                </div>
+                <button class="btn btn-primary" onclick="confirmPurchase()" style="flex: 1; justify-content: center; height: 55px; font-size: 1.1rem;">Añadir al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Same Footer, Cart Drawer, and Scripts -->
+    <script src="../script.js"></script>
+    <script>
+        lucide.createIcons();
+        // Simulation: Load data from URL params or default
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('name') || "Café Gourmet Caribe";
+            const price = params.get('price') || 450;
+            const seller = params.get('seller') || "Caribe Coffee Co.";
+            
+            document.getElementById('p-name').innerText = name;
+            document.getElementById('p-price').innerText = `NIO ${price}`;
+            document.getElementById('s-name').innerText = seller;
+            document.getElementById('s-logo').innerText = seller[0];
+            
+            updateCartUI();
+        });
+    </script>
+</body>
+</html>

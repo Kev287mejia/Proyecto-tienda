@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda | EternalLabs</title>
+    <link rel="stylesheet" href="../index.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .business-hero { height: 300px; background: url('../store_banner_mockup_1778801107051.png') center/cover no-repeat; position: relative; border-radius: 0 0 40px 40px; }
+        .business-header { max-width: 1200px; margin: -60px auto 40px; padding: 0 20px; position: relative; display: flex; align-items: flex-end; gap: 30px; }
+        .business-logo-large { width: 140px; height: 140px; border-radius: 32px; background: white; border: 8px solid white; box-shadow: var(--shadow-lg); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 800; color: var(--primary); }
+        .business-info-main { padding-bottom: 15px; }
+        .business-info-main h1 { font-size: 2.5rem; margin: 0; display: flex; align-items: center; gap: 10px; }
+        .verified-badge { color: var(--info); width: 24px; height: 24px; }
+        
+        .business-content { max-width: 1200px; margin: 0 auto 80px; padding: 0 20px; display: grid; grid-template-columns: 300px 1fr; gap: 40px; }
+        .business-sidebar-card { background: #f8fafc; padding: 24px; border-radius: 24px; border: 1px solid #e2e8f0; }
+        
+        @media (max-width: 768px) { .business-header { flex-direction: column; align-items: center; text-align: center; margin-top: -80px; } .business-content { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../" class="logo" style="text-decoration: none; color: inherit;">
+                <div class="logo-circle">E</div>
+                <span>Plataforma <span class="gradient-text">Caribe</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="../">Inicio</a>
+                <a href="../marketplace/">Marketplace</a>
+            </div>
+            <div class="nav-actions">
+                <div class="cart-icon-wrapper" onclick="toggleCart()">
+                    <i data-lucide="shopping-cart"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="business-hero"></div>
+    <div class="business-header">
+        <div class="business-logo-large" id="b-logo">T</div>
+        <div class="business-info-main">
+            <h1 id="b-name">Cargando... <i data-lucide="check-circle" class="verified-badge"></i></h1>
+            <p style="color: var(--text-muted); margin: 5px 0 0; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="map-pin" style="width: 16px;"></i> <span id="b-location">Bluefields, Nicaragua</span>
+            </p>
+        </div>
+        <button class="btn btn-primary" style="margin-left: auto; margin-bottom: 15px;" onclick="window.open('https://wa.me/50588888888')">
+            <i data-lucide="message-circle"></i> Contactar WhatsApp
+        </button>
+    </div>
+
+    <div class="business-content">
+        <aside>
+            <div class="business-sidebar-card">
+                <h3 style="margin-bottom: 15px; font-size: 1rem;">Sobre el negocio</h3>
+                <p id="b-desc" style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Somos líderes en la distribución de productos autóctonos y tecnología en la Costa Caribe.</p>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.85rem;">
+                        <span>Ventas Totales</span>
+                        <span style="font-weight: 700;">+500</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                        <span>Miembro desde</span>
+                        <span style="font-weight: 700;">2024</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <main>
+            <h2 style="margin-bottom: 30px;">Productos de esta tienda</h2>
+            <div id="business-products" class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px;">
+                <!-- Products injected by JS -->
+            </div>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+    <script>
+        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('name') || "TecnoCaribe Store";
+            document.getElementById('b-name').innerHTML = `${name} <i data-lucide="check-circle" class="verified-badge"></i>`;
+            document.getElementById('b-logo').innerText = name[0];
+            
+            renderBusinessProducts();
+            updateCartUI();
+            lucide.createIcons();
+        });
+
+        function renderBusinessProducts() {
+            const container = document.getElementById('business-products');
+            const prods = [
+                { id: 1, name: "Producto 1", price: 450, image: "../caribbean_coffee_product_1778800497641.png" },
+                { id: 2, name: "Producto 2", price: 320, image: "../media__1778799917034.jpg" }
+            ];
+            container.innerHTML = prods.map(p => `
+                <div class="product-card">
+                    <img src="${p.image}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${p.name}</h3>
+                        <div class="product-price">NIO ${p.price}</div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 15px; font-size: 0.8rem;" onclick="addToCart('${p.name}', ${p.price}, '${p.image}')">Añadir</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
