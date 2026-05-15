@@ -114,8 +114,21 @@ function processCheckout() {
     console.log('Processing checkout for', cart.length, 'items');
     const drawer = document.getElementById('cart-drawer');
     const successModal = document.getElementById('success-modal');
+    const summaryList = document.getElementById('summary-items-list');
     
     if (drawer) drawer.classList.remove('active');
+    
+    // Preparar el resumen antes de vaciar
+    let summaryHtml = '';
+    cart.forEach(item => {
+        summaryHtml += `
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                <span style="font-weight: 500;">${item.title}</span>
+                <span style="color: var(--primary); font-weight: 600;">${item.price}</span>
+            </div>
+        `;
+    });
+    if (summaryList) summaryList.innerHTML = summaryHtml;
     
     // Simulate API call
     setTimeout(() => {
