@@ -1,3 +1,4 @@
+// State management
 let cart = [];
 
 // Header scroll effect
@@ -9,22 +10,30 @@ window.addEventListener('scroll', () => {
 
 // CART LOGIC
 function toggleCart() {
-    document.getElementById('cart-drawer').classList.toggle('active');
+    const drawer = document.getElementById('cart-drawer');
+    if (drawer) {
+        drawer.classList.toggle('active');
+        console.log('Toggle Cart:', drawer.classList.contains('active'));
+    }
 }
 
 function openProductDetail(title, price, seller, location, imgSrc) {
+    console.log('Opening product:', title);
     const modal = document.getElementById('product-modal');
+    
+    // Set UI elements
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-price').innerText = price;
     document.getElementById('modal-seller').innerText = `por ${seller}`;
     document.getElementById('modal-location').innerText = location;
     document.getElementById('modal-image').style.background = `url(${imgSrc}) center/cover no-repeat`;
     
-    // Almacenamos los datos para el carrito
+    // Store current selection for cart
     window.currentProduct = { title, price, seller, location, imgSrc };
     
+    // Open modal
     modal.classList.add('active');
-    lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
 }
 
 function closeModal() {
@@ -32,11 +41,20 @@ function closeModal() {
 }
 
 function confirmPurchase() {
-    const product = window.currentProduct;
-    cart.push(product);
+    console.log('Adding to cart:', window.currentProduct);
+    if (!window.currentProduct) return;
+    
+    // Add to state
+    cart.push({ ...window.currentProduct });
+    
+    // Update UI
     updateCartUI();
+    
+    // Close modal and show cart
     closeModal();
-    toggleCart(); // Mostrar el carrito automáticamente
+    setTimeout(() => {
+        toggleCart();
+    }, 300);
 }
 
 function updateCartUI() {
@@ -44,6 +62,8 @@ function updateCartUI() {
     const footer = document.getElementById('cart-footer');
     const countBadge = document.getElementById('cart-count');
     const totalPriceEl = document.getElementById('cart-total-price');
+
+    if (!container || !countBadge) return;
 
     countBadge.innerText = cart.length;
 
@@ -55,31 +75,34 @@ function updateCartUI() {
                 <button class="btn btn-outline" onclick="toggleCart()" style="margin-top: 20px;">Seguir comprando</button>
             </div>
         `;
-        footer.style.display = 'none';
+        if (footer) footer.style.display = 'none';
     } else {
-        footer.style.display = 'block';
+        if (footer) footer.style.display = 'block';
         let itemsHtml = '';
         let total = 0;
 
         cart.forEach((item, index) => {
-            const priceNum = parseInt(item.price.replace(/[^\d]/g, ''));
+            // Safe price parsing
+            const priceNum = parseInt(item.price.replace(/[^\d]/g, '')) || 0;
             total += priceNum;
+            
             itemsHtml += `
                 <div class="cart-item-row">
-                    <img src="${item.imgSrc}" class="cart-item-img">
+                    <div style="width: 60px; height: 60px; border-radius: 12px; background: url(${item.imgSrc}) center/cover no-repeat; flex-shrink: 0;"></div>
                     <div class="cart-item-info">
-                        <h4>${item.title}</h4>
-                        <p>${item.price}</p>
-                        <button onclick="removeFromCart(${index})" style="background:none; border:none; color:var(--primary); font-size:0.7rem; padding:0; cursor:pointer;">Eliminar</button>
+                        <h4 style="margin: 0; font-size: 0.9rem;">${item.title}</h4>
+                        <p style="margin: 4px 0; color: var(--primary); font-weight: 700;">${item.price}</p>
+                        <button onclick="removeFromCart(${index})" style="background:none; border:none; color:var(--text-muted); font-size:0.7rem; padding:0; cursor:pointer; text-decoration: underline;">Eliminar</button>
                     </div>
                 </div>
             `;
         });
 
         container.innerHTML = itemsHtml;
-        totalPriceEl.innerText = `NIO ${total.toLocaleString()}`;
+        if (totalPriceEl) totalPriceEl.innerText = `NIO ${total.toLocaleString()}`;
     }
-    lucide.createIcons();
+    
+    if (window.lucide) lucide.createIcons();
 }
 
 function removeFromCart(index) {
@@ -88,49 +111,57 @@ function removeFromCart(index) {
 }
 
 function processCheckout() {
+    console.log('Processing checkout for', cart.length, 'items');
     const drawer = document.getElementById('cart-drawer');
     const successModal = document.getElementById('success-modal');
     
-    drawer.classList.remove('active');
+    if (drawer) drawer.classList.remove('active');
     
-    // Simular procesamiento
+    // Simulate API call
     setTimeout(() => {
-        successModal.style.display = 'flex';
-        successModal.classList.add('active');
-        cart = []; // Vaciar carrito
+        if (successModal) {
+            successModal.style.display = 'flex';
+            successModal.classList.add('active');
+        }
+        cart = []; 
         updateCartUI();
-        lucide.createIcons();
-    }, 800);
+    }, 600);
 }
 
 function closeSuccess() {
-    document.getElementById('success-modal').style.display = 'none';
-    document.getElementById('success-modal').classList.remove('active');
+    const successModal = document.getElementById('success-modal');
+    if (successModal) {
+        successModal.style.display = 'none';
+        successModal.classList.remove('active');
+    }
 }
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+// Initial setup
+document.addEventListener('DOMContentLoaded', () => {
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
     });
-});
 
-// Animation on scroll
-const observerOptions = { threshold: 0.1 };
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+    // Animation on scroll
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.product-card, .flash-deals').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease-out';
+        observer.observe(el);
     });
-}, observerOptions);
-
-document.querySelectorAll('.product-card, .flash-deals').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'all 0.6s ease-out';
-    observer.observe(el);
 });
