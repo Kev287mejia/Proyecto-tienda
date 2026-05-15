@@ -81,7 +81,7 @@
 
         <div class="product-grid">
             <!-- Product 1 -->
-            <div class="product-card">
+            <div class="product-card" onclick="openProductDetail('Audífonos Inalámbricos Pro', 'NIO 1,850', 'TecnoCaribe', 'Bluefields', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600')">
                 <div class="product-img">
                     <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600" alt="Audífonos">
                     <div class="badge badge-discount">-23%</div>
@@ -101,7 +101,7 @@
             </div>
 
             <!-- Product 2 -->
-            <div class="product-card">
+            <div class="product-card" onclick="openProductDetail('Vestido Tropical Estampado', 'NIO 950', 'Modas Maritza', 'Bilwi', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600')">
                 <div class="product-img">
                     <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600" alt="Vestido">
                     <div class="wishlist-btn"><i data-lucide="heart"></i></div>
@@ -118,7 +118,7 @@
             </div>
 
             <!-- Product 3 -->
-            <div class="product-card">
+            <div class="product-card" onclick="openProductDetail('Café Gourmet del Caribe', 'NIO 450', 'Granos de Oro', 'Bluefields', 'caribbean_coffee_product_1778800497641.png')">
                 <div class="product-img">
                     <img src="caribbean_coffee_product_1778800497641.png" alt="Café del Caribe">
                     <div class="badge badge-new">NUEVO</div>
@@ -203,6 +203,40 @@
             &copy; 2026 Plataforma Caribe. Todos los derechos reservados.
         </div>
     </footer>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); z-index: 1000; align-items: center; justify-content: center;">
+        <div class="modal-content" style="background: white; border-radius: 24px; width: 90%; max-width: 500px; overflow: hidden; position: relative; animation: slideUp 0.4s ease-out;">
+            <button onclick="closeModal()" style="position: absolute; top: 15px; right: 15px; border: none; background: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="x" style="width: 20px;"></i>
+            </button>
+            <div id="modal-image" style="width: 100%; height: 250px; background: #eee;"></div>
+            <div style="padding: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                    <h2 id="modal-title" style="margin: 0; font-size: 1.5rem;"></h2>
+                    <span id="modal-price" style="font-weight: 700; color: var(--primary); font-size: 1.25rem;"></span>
+                </div>
+                <p id="modal-seller" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;"></p>
+                <div style="background: #F8FAFC; padding: 15px; border-radius: 12px; margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
+                        <i data-lucide="map-pin" style="width: 14px;"></i> <span id="modal-location"></span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--success); font-weight: 600;">
+                        <i data-lucide="shield-check" style="width: 14px;"></i> Negocio Verificado por EternalLabs
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="confirmPurchase()" style="width: 100%; justify-content: center;">Confirmar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal-overlay.active { display: flex !important; }
+    </style>
 
     <script src="script.js"></script>
     <script>
