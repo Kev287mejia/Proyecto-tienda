@@ -4,20 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketplace | EternalLabs Caribe</title>
-    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="../style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        .marketplace-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 280px 1fr; gap: 40px; }
-        .filters-sidebar { position: sticky; top: 100px; height: fit-content; background: white; padding: 24px; border-radius: 24px; border: 1px solid #f1f5f9; }
-        .filter-group { margin-bottom: 30px; }
-        .filter-title { font-weight: 700; margin-bottom: 15px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
-        .filter-option { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; cursor: pointer; font-size: 0.95rem; }
-        .filter-option input { width: auto; accent-color: var(--primary); }
+        /* Scoped Marketplace Styles */
+        body { padding-top: 100px; }
+        .marketplace-container { max-width: 1400px; margin: 40px auto; padding: 0 5%; display: grid; grid-template-columns: 280px 1fr; gap: 40px; }
         
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
-        .marketplace-header { margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .filters-sidebar { position: sticky; top: 120px; height: fit-content; background: white; padding: 30px; border-radius: 32px; box-shadow: var(--shadow-md); border: 1px solid #f1f5f9; }
+        .filter-group { margin-bottom: 35px; }
+        .filter-title { font-weight: 800; margin-bottom: 20px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+        .filter-option { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; cursor: pointer; font-size: 0.95rem; font-weight: 500; transition: var(--transition); }
+        .filter-option:hover { color: var(--accent-orange); }
+        .filter-option input { width: 18px; height: 18px; accent-color: var(--accent-orange); cursor: pointer; }
         
-        @media (max-width: 768px) {
+        .marketplace-main { min-height: 100vh; }
+        .marketplace-header { margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .marketplace-header h1 { font-size: 2.5rem; margin-bottom: 8px; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        
+        .sort-select { padding: 12px 20px; border-radius: 16px; border: 1px solid #E2E8F0; background: white; font-family: inherit; font-weight: 600; cursor: pointer; outline: none; transition: var(--transition); }
+        .sort-select:focus { border-color: var(--accent-orange); box-shadow: 0 0 0 4px rgba(255, 126, 95, 0.1); }
+
+        /* Fixing Navbar for Subdirectory */
+        header { background: white !important; padding: 1.5rem 5% !important; box-shadow: var(--shadow-sm); color: var(--text-main) !important; }
+        .logo { color: var(--text-main) !important; }
+        .nav-icons { display: flex; align-items: center; gap: 25px; color: var(--text-main); }
+        .nav-icons i { cursor: pointer; transition: var(--transition); }
+        .nav-icons i:hover { color: var(--accent-orange); transform: translateY(-2px); }
+
+        @media (max-width: 1024px) {
             .marketplace-container { grid-template-columns: 1fr; }
             .filters-sidebar { display: none; }
         }
@@ -25,63 +42,61 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="../" class="logo" style="text-decoration: none; color: inherit;">
-                <div class="logo-circle">E</div>
-                <span>Plataforma <span class="gradient-text">Caribe</span></span>
-            </a>
-            <div class="nav-links">
-                <a href="../">Inicio</a>
-                <a href="#" class="active">Marketplace</a>
-                <a href="../login/">Entrar</a>
-            </a>
-            <div class="nav-actions">
-                <div class="cart-icon-wrapper" onclick="toggleCart()">
-                    <i data-lucide="shopping-cart"></i>
-                    <span class="cart-badge" id="cart-count">0</span>
-                </div>
-                <button class="btn btn-primary" onclick="window.location.href='../register/'">Vender</button>
+    <!-- Header (Synced with Home) -->
+    <header id="main-header">
+        <a href="../" class="logo" style="text-decoration: none;">
+            <div class="logo-circle">E</div>
+            <span>Plataforma <span class="gradient-text">Caribe</span></span>
+        </a>
+        <div class="nav-icons">
+            <a href="../" style="text-decoration: none; color: inherit; font-weight: 600; font-size: 0.9rem;">Inicio</a>
+            <a href="#" style="text-decoration: none; color: var(--accent-orange); font-weight: 600; font-size: 0.9rem;">Marketplace</a>
+            <div class="cart-icon-wrapper" onclick="toggleCart()" style="position: relative; cursor: pointer;">
+                <i data-lucide="shopping-bag"></i>
+                <span id="cart-count" class="cart-badge" style="position: absolute; top: -8px; right: -8px; background: var(--primary-gradient); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; border: 2px solid white;">0</span>
             </div>
+            <i data-lucide="menu"></i>
         </div>
-    </nav>
+    </header>
 
     <div class="marketplace-container">
         <!-- Sidebar Filters -->
         <aside class="filters-sidebar">
             <div class="filter-group">
                 <h3 class="filter-title">Categorías</h3>
-                <label class="filter-option"><input type="checkbox" checked> Todos</label>
-                <label class="filter-option"><input type="checkbox"> Tecnología</label>
-                <label class="filter-option"><input type="checkbox"> Alimentos</label>
-                <label class="filter-option"><input type="checkbox"> Moda</label>
-                <label class="filter-option"><input type="checkbox"> Artesanías</label>
+                <label class="filter-option"><input type="checkbox" checked> <span>Todos</span></label>
+                <label class="filter-option"><input type="checkbox"> <span>Tecnología</span></label>
+                <label class="filter-option"><input type="checkbox"> <span>Alimentos</span></label>
+                <label class="filter-option"><input type="checkbox"> <span>Moda</span></label>
+                <label class="filter-option"><input type="checkbox"> <span>Artesanías</span></label>
             </div>
 
             <div class="filter-group">
                 <h3 class="filter-title">Ubicación</h3>
-                <label class="filter-option"><input type="checkbox"> Bluefields</label>
-                <label class="filter-option"><input type="checkbox"> Bilwi</label>
+                <label class="filter-option"><input type="checkbox"> <span>Bluefields</span></label>
+                <label class="filter-option"><input type="checkbox"> <span>Bilwi</span></label>
             </div>
 
             <div class="filter-group">
                 <h3 class="filter-title">Rango de Precio</h3>
-                <input type="range" style="width: 100%;">
-                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 10px;">
+                <input type="range" style="width: 100%; margin-bottom: 10px; accent-color: var(--accent-orange);">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">
                     <span>NIO 0</span>
                     <span>NIO 10,000+</span>
                 </div>
             </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="window.location.href='../register/'">Vender en Plataforma</button>
         </aside>
 
         <!-- Main Marketplace -->
-        <main>
+        <main class="marketplace-main">
             <div class="marketplace-header">
                 <div>
-                    <h1 style="font-size: 2rem;">Explorar Marketplace</h1>
-                    <p style="color: var(--text-muted);">Encuentra lo mejor del Caribe Nicaragüense.</p>
+                    <h1>Explorar <span class="gradient-text">Marketplace</span></h1>
+                    <p style="color: var(--text-muted); font-weight: 500;">Encuentra lo mejor del Caribe Nicaragüense.</p>
                 </div>
-                <select style="padding: 10px 16px; border-radius: 12px; border: 1px solid #E2E8F0; font-family: inherit;">
+                <select class="sort-select">
                     <option>Relevancia</option>
                     <option>Precio: Menor a Mayor</option>
                     <option>Precio: Mayor a Menor</option>
@@ -95,29 +110,7 @@
         </main>
     </div>
 
-    <!-- Same Footer as Home -->
-    <footer style="background: var(--dark); color: white; padding: 80px 0 40px;">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px;">
-            <div>
-                <div class="logo" style="margin-bottom: 20px;">
-                    <div class="logo-circle">E</div>
-                    <span>Plataforma <span class="gradient-text">Caribe</span></span>
-                </div>
-                <p style="opacity: 0.7; max-width: 300px;">El primer marketplace dedicado exclusivamente al Caribe Nicaragüense.</p>
-            </div>
-            <div style="display: flex; gap: 50px;">
-                <div>
-                    <h4 style="margin-bottom: 15px;">Gestión</h4>
-                    <ul style="list-style: none; opacity: 0.7; line-height: 2;">
-                        <li><a href="../seller/" style="color: white; text-decoration: none;">Panel de Vendedor</a></li>
-                        <li><a href="../admin/" style="color: white; text-decoration: none;">Super Admin</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Cart Drawer & Modals (Same as main index) -->
+    <!-- Same Cart Drawer as main index -->
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-header">
             <h3>Tu Carrito</h3>
@@ -135,10 +128,31 @@
         </div>
     </div>
 
+    <footer style="background: var(--bg-dark); color: white; padding: 100px 0 50px; margin-top: 100px;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 5%; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 60px;">
+            <div>
+                <div class="logo" style="margin-bottom: 25px; color: white !important;">
+                    <div class="logo-circle">E</div>
+                    <span>Plataforma Caribe</span>
+                </div>
+                <p style="opacity: 0.6; max-width: 350px; line-height: 1.8;">Impulsando el comercio local en las Regiones Autónomas de Nicaragua.</p>
+            </div>
+            <div style="display: flex; gap: 80px;">
+                <div>
+                    <h4 style="margin-bottom: 20px; font-size: 1.1rem;">Plataforma</h4>
+                    <ul style="list-style: none; opacity: 0.6; line-height: 2.5; font-size: 0.95rem;">
+                        <li><a href="../seller/" style="color: white; text-decoration: none;">Panel de Vendedor</a></li>
+                        <li><a href="../admin/" style="color: white; text-decoration: none;">Super Admin</a></li>
+                        <li><a href="../login/" style="color: white; text-decoration: none;">Mi Cuenta</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="../script.js"></script>
     <script>
         lucide.createIcons();
-        // Custom init for marketplace to render all products
         document.addEventListener('DOMContentLoaded', () => {
             renderProductsInGrid();
             updateCartUI();
@@ -147,22 +161,34 @@
         function renderProductsInGrid() {
             const grid = document.getElementById('product-grid');
             const prods = [
-                { id: 1, name: "Café Gourmet", price: 450, seller: "Café Caribe", location: "Bluefields", image: "../caribbean_coffee_product_1778800497641.png" },
+                { id: 1, name: "Café Gourmet Caribe", price: 450, seller: "Granos de Oro", location: "Bluefields", image: "../caribbean_coffee_product_1778800497641.png" },
                 { id: 2, name: "Artesanía en Coco", price: 320, seller: "Artesanos Bilwi", location: "Bilwi", image: "../media__1778799917034.jpg" },
-                { id: 3, name: "Camarones Frescos", price: 850, seller: "Pesca Real", location: "Bluefields", image: "../caribbean_hero_background_1778800043521.png" },
+                { id: 3, name: "Vestido Tropical", price: 950, seller: "Modas Maritza", location: "Bilwi", image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600" },
                 { id: 4, name: "Chocolate Orgánico", price: 180, seller: "Cacao del Sur", location: "Bluefields", image: "../media__1778800601810.jpg" }
             ];
 
             grid.innerHTML = prods.map(p => `
-                <div class="product-card" onclick="openProductDetail('${p.name}', ${p.price}, '${p.seller}', '${p.location}', '${p.image}')">
-                    <img src="${p.image}" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">${p.name}</h3>
-                        <p class="product-seller">${p.seller}</p>
-                        <div class="product-price">NIO ${p.price}</div>
+                <div class="product-card" style="cursor: pointer;" onclick="window.location.href='../product/?name=${encodeURIComponent(p.name)}&price=${p.price}&seller=${encodeURIComponent(p.seller)}'">
+                    <div class="product-img" style="position: relative; height: 250px; overflow: hidden; border-radius: 20px;">
+                        <img src="${p.image}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div class="badge badge-new" style="position: absolute; top: 15px; left: 15px; background: white; padding: 5px 12px; border-radius: 10px; font-weight: 700; font-size: 0.7rem;">NUEVO</div>
+                    </div>
+                    <div class="product-info" style="padding: 20px 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                                <i data-lucide="map-pin" style="width: 12px;"></i> ${p.location}
+                            </span>
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #fbbf24; display: flex; align-items: center; gap: 4px;">
+                                <i data-lucide="star" style="width: 12px; fill: currentColor;"></i> 4.9
+                            </span>
+                        </div>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 5px;">${p.name}</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">por ${p.seller}</p>
+                        <div style="font-size: 1.2rem; font-weight: 800; color: var(--accent-orange);">NIO ${p.price.toLocaleString()}</div>
                     </div>
                 </div>
             `).join('');
+            lucide.createIcons();
         }
     </script>
 </body>
