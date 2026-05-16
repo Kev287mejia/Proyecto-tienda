@@ -46,17 +46,30 @@
                     <i data-lucide="database"></i>
                     <span>Inventario</span>
                 </a>
-                <a href="/seller/analytics/" class="nav-item">
+                <a href="#" onclick="switchSection('analytics')" class="nav-item">
                     <i data-lucide="bar-chart-3"></i>
                     <span>Analytics</span>
                 </a>
-                <a href="/seller/settings/" class="nav-item">
+                <a href="#" onclick="switchSection('finance')" class="nav-item">
+                    <i data-lucide="wallet"></i>
+                    <span>Finanzas</span>
+                </a>
+                <a href="#" onclick="switchSection('shipping')" class="nav-item">
+                    <i data-lucide="truck"></i>
+                    <span>Logística</span>
+                </a>
+                <a href="#" onclick="switchSection('promotions')" class="nav-item">
+                    <i data-lucide="tag"></i>
+                    <span>Promociones</span>
+                </a>
+                <a href="#" onclick="switchSection('messages')" class="nav-item">
+                    <i data-lucide="message-square"></i>
+                    <span>Mensajes</span>
+                    <span class="badge" style="background: var(--primary); margin-left: auto; padding: 2px 6px; border-radius: 4px; font-size: 0.6rem;">2</span>
+                </a>
+                <a href="#" onclick="switchSection('settings')" class="nav-item">
                     <i data-lucide="store"></i>
                     <span>Perfil Tienda</span>
-                </a>
-                <a href="/seller/verification/" class="nav-item" style="margin-top: 10px; border-top: 1px solid #eee; padding-top: 15px;">
-                    <i data-lucide="shield-check" style="color: var(--info);"></i>
-                    <span>Verificación</span>
                 </a>
             </nav>
 
@@ -77,16 +90,31 @@
             
             <!-- Dashboard Section -->
             <section id="dashboard" class="admin-section">
-                <!-- Global Warning -->
-                <div id="verification-warning" style="background: #FFFBEB; border: 1px solid #FEF3C7; padding: 16px; border-radius: 12px; margin-bottom: 24px; display: flex; align-items: center; gap: 15px;">
-                    <div style="width: 40px; height: 40px; background: #FEF3C7; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #D97706;">
-                        <i data-lucide="alert-triangle"></i>
+                <!-- Gamified Onboarding Banner -->
+                <div class="onboarding-banner">
+                    <div class="onboarding-header">
+                        <div>
+                            <h2 class="onboarding-title">¡Casi listo para vender!</h2>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Completa estos pasos para activar tu tienda en el marketplace.</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">60%</span>
+                            <p style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Completado</p>
+                        </div>
                     </div>
-                    <div style="flex: 1;">
-                        <h4 style="color: #92400E; margin-bottom: 2px;">Completa tu verificación</h4>
-                        <p style="color: #B45309; font-size: 0.85rem;">Tu negocio aún no puede publicar productos. Sube tus documentos para empezar a vender.</p>
+                    
+                    <div class="onboarding-steps">
+                        <div class="step-pill completed" title="Cuenta Creada"></div>
+                        <div class="step-pill completed" title="Perfil de Tienda"></div>
+                        <div class="step-pill active" title="Verificación KYB"></div>
+                        <div class="step-pill" title="Primer Producto"></div>
+                        <div class="step-pill" title="Cuenta Bancaria"></div>
                     </div>
-                    <button class="btn-admin" style="background: #D97706; color: white; border: none;" onclick="openModal('verification-modal')">Verificar ahora</button>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span class="onboarding-label">Siguiente paso: Sube tus documentos de identidad</span>
+                        <button class="btn-admin btn-admin-primary" onclick="openModal('verification-modal')">Continuar Verificación</button>
+                    </div>
                 </div>
 
                 <div class="page-header">
@@ -111,19 +139,31 @@
 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);"><i data-lucide="dollar-sign"></i></div>
-                        <div class="stat-label">Ventas del día</div>
-                        <div class="stat-value">NIO 0</div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);"><i data-lucide="dollar-sign"></i></div>
+                            <div class="stat-comparison change-up">↑ 12%</div>
+                        </div>
+                        <div class="stat-label">Ventas de Hoy</div>
+                        <div class="stat-value">NIO 4,250</div>
+                        <div class="sparkline-container"><canvas id="sparkline-sales"></canvas></div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--info);"><i data-lucide="shopping-cart"></i></div>
-                        <div class="stat-label">Pedidos pendientes</div>
-                        <div class="stat-value">0</div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--info);"><i data-lucide="shopping-cart"></i></div>
+                            <div class="stat-comparison" style="color: var(--text-muted);">Estable</div>
+                        </div>
+                        <div class="stat-label">Pedidos de Hoy</div>
+                        <div class="stat-value">12</div>
+                        <div class="sparkline-container"><canvas id="sparkline-orders"></canvas></div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: rgba(212, 20, 90, 0.1); color: var(--primary);"><i data-lucide="package"></i></div>
-                        <div class="stat-label">Productos activos</div>
-                        <div class="stat-value">0</div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div class="stat-icon" style="background: rgba(212, 20, 90, 0.1); color: var(--primary);"><i data-lucide="eye"></i></div>
+                            <div class="stat-comparison change-up">↑ 24%</div>
+                        </div>
+                        <div class="stat-label">Visitas a Tienda</div>
+                        <div class="stat-value">342</div>
+                        <div class="sparkline-container"><canvas id="sparkline-views"></canvas></div>
                     </div>
                 </div>
 
@@ -237,6 +277,156 @@
                 </div>
             </section>
 
+            <!-- Finance / Wallet Section -->
+            <section id="finance" class="admin-section" style="display: none;">
+                <div class="page-header">
+                    <div>
+                        <h1>Tus Finanzas</h1>
+                        <p style="color: var(--text-muted);">Gestiona tus ingresos y solicita retiros.</p>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Saldo Disponible</div>
+                        <div class="stat-value" style="color: var(--success);">NIO 12,450.00</div>
+                        <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 8px;">Listo para retirar</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">En Espera (Garantía)</div>
+                        <div class="stat-value">NIO 3,200.00</div>
+                        <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 8px;">Liberación en 48h</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Retiros Exitosos</div>
+                        <div class="stat-value">NIO 45,000.00</div>
+                        <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 8px;">Total histórico</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="content-card">
+                        <h3 class="card-title">Historial de Transacciones</h3>
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Concepto</th>
+                                    <th>Monto</th>
+                                    <th>Comisión (10%)</th>
+                                    <th>Neto</th>
+                                </tr>
+                            </thead>
+                            <tbody id="finance-table-body">
+                                <!-- Injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="content-card">
+                        <h3 class="card-title">Solicitar Retiro</h3>
+                        <div class="form-group">
+                            <label>Monto a retirar</label>
+                            <input type="number" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Cuenta Destino (Banpro)</label>
+                            <select>
+                                <option>Cuenta Corriente (****4521)</option>
+                                <option>Añadir nueva cuenta...</option>
+                            </select>
+                        </div>
+                        <button class="btn-admin btn-admin-primary" style="width: 100%;" onclick="window.requestPayout()">Solicitar Fondos</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Shipping / Logistics Section -->
+            <section id="shipping" class="admin-section" style="display: none;">
+                <div class="page-header">
+                    <div>
+                        <h1>Configuración de Logística</h1>
+                        <p style="color: var(--text-muted);">Define cómo y por cuánto envías tus productos.</p>
+                    </div>
+                    <button class="btn-admin btn-admin-primary">Añadir Zona</button>
+                </div>
+                
+                <div class="content-card">
+                    <h3 class="card-title">Zonas de Entrega y Tarifas</h3>
+                    <div style="display: grid; gap: 15px; margin-top: 20px;">
+                        <div style="padding: 20px; border: 1px solid #eee; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong>Bluefields Urbano</strong>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">Entrega en Moto / Delivery Local</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-weight: 700;">NIO 50.00</div>
+                                <span style="font-size: 0.7rem; color: var(--success);">24 horas</span>
+                            </div>
+                        </div>
+                        <div style="padding: 20px; border: 1px solid #eee; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong>Bilwi / Corn Island</strong>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">Envío por Panga / Carga Marítima</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-weight: 700;">NIO 150.00</div>
+                                <span style="font-size: 0.7rem; color: var(--warning);">3-5 días</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Promotions Section -->
+            <section id="promotions" class="admin-section" style="display: none;">
+                <div class="page-header">
+                    <h1>Marketing y Promociones</h1>
+                    <button class="btn-admin btn-admin-primary">Crear Cupón</button>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="content-card">
+                        <h3 class="card-title">Cupones Activos</h3>
+                        <div style="padding: 40px; text-align: center; color: var(--text-muted);">
+                            <i data-lucide="tag" style="width: 48px; height: 48px; opacity: 0.2; margin-bottom: 10px;"></i>
+                            <p>No tienes cupones creados aún.</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <h3 class="card-title">Campaña Caribe Proxima</h3>
+                        <p style="font-size: 0.85rem; margin: 15px 0;">Únete a la campaña "Verano Costeño" y destaca tus productos en el Home.</p>
+                        <button class="btn-admin" style="width: 100%; background: #0F172A; color: white;">Participar ahora</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages" class="admin-section" style="display: none;">
+                <div class="page-header"><h1>Centro de Mensajes</h1></div>
+                <div class="dashboard-grid" style="grid-template-columns: 350px 1fr;">
+                    <div class="content-card" style="padding: 0;">
+                        <div style="padding: 20px; border-bottom: 1px solid #eee;"><strong>Chats Recientes</strong></div>
+                        <div style="height: 500px; overflow-y: auto;">
+                            <div style="padding: 20px; background: rgba(212, 20, 90, 0.05); border-left: 3px solid var(--primary); display: flex; gap: 12px; cursor: pointer;">
+                                <div style="width: 40px; height: 40px; background: #ddd; border-radius: 50%;"></div>
+                                <div>
+                                    <div style="font-weight: 700; font-size: 0.9rem;">María Auxiliadora</div>
+                                    <p style="font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">¿Hacen envíos a Bilwi?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" style="display: flex; flex-direction: column;">
+                        <div style="flex: 1; display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+                            <p>Selecciona un chat para empezar a conversar.</p>
+                        </div>
+                        <div style="padding-top: 20px; border-top: 1px solid #eee; display: flex; gap: 10px;">
+                            <input type="text" placeholder="Escribe un mensaje..." style="flex: 1;">
+                            <button class="btn-admin btn-admin-primary">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Settings / KYB Section -->
             <section id="settings" class="admin-section" style="display: none;">
                 <div class="page-header"><h1>Configuración y Verificación</h1></div>
@@ -299,7 +489,7 @@
         .modal-overlay.active .modal-content { transform: translateY(0); }
     </style>
 
-    <script src="../seller.js"></script>
+    <script type="module" src="../js/SellerMain.js"></script>
     <script>
         lucide.createIcons();
     </script>

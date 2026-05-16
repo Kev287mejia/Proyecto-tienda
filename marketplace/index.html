@@ -3,34 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explorar Marketplace | EternalLabs</title>
+    <title>Explorar Marketplace | Plataforma Caribe</title>
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="../style.css">
+    
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
-        body { padding-top: 100px; background-color: #FDFCF0; }
-        .marketplace-container { max-width: 1400px; margin: 40px auto; padding: 0 5%; display: grid; grid-template-columns: 320px 1fr; gap: 50px; }
+        body { padding-top: 100px; }
+        .marketplace-container { 
+            max-width: 1400px; 
+            margin: 40px auto; 
+            padding: 0 5%; 
+            display: grid; 
+            grid-template-columns: 280px 1fr; 
+            gap: 40px; 
+        }
         
-        .filters-sidebar { position: sticky; top: 120px; height: fit-content; background: white; padding: 40px; border-radius: 40px; box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.03); }
-        .filter-group { margin-bottom: 40px; }
-        .filter-title { font-weight: 800; margin-bottom: 25px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); }
-        .filter-option { display: flex; align-items: center; gap: 15px; margin-bottom: 18px; cursor: pointer; font-size: 1rem; font-weight: 600; transition: var(--transition); }
+        .filters-sidebar { 
+            position: sticky; 
+            top: 120px; 
+            height: fit-content; 
+            background: white; 
+            padding: 30px; 
+            border-radius: var(--radius-lg); 
+            box-shadow: var(--shadow-sm); 
+            border: 1px solid #eee;
+        }
+        
+        .filter-group { margin-bottom: 30px; }
+        .filter-title { 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.1em; 
+            color: var(--text-muted); 
+        }
+        
+        .filter-option { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            margin-bottom: 15px; 
+            cursor: pointer; 
+            font-size: 0.95rem; 
+            font-weight: 600; 
+            transition: var(--transition); 
+        }
+        
         .filter-option:hover { color: var(--accent-orange); }
-        .filter-option input { width: 20px; height: 20px; accent-color: var(--accent-orange); cursor: pointer; }
+        .filter-option input { width: 18px; height: 18px; accent-color: var(--accent-orange); cursor: pointer; }
         
-        .marketplace-header { margin-bottom: 50px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .marketplace-header h1 { font-size: 3rem; letter-spacing: -0.03em; }
+        .marketplace-header { 
+            margin-bottom: 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end; 
+        }
         
-        .sort-select { padding: 14px 24px; border-radius: 20px; border: 1px solid #E2E8F0; background: white; font-family: inherit; font-weight: 700; cursor: pointer; outline: none; transition: var(--transition); font-size: 0.9rem; }
-        .sort-select:hover { border-color: var(--accent-orange); }
+        .sort-select { 
+            padding: 12px 20px; 
+            border-radius: 12px; 
+            border: 1px solid #E2E8F0; 
+            background: white; 
+            font-family: inherit; 
+            font-weight: 700; 
+            cursor: pointer; 
+            outline: none; 
+            font-size: 0.85rem; 
+        }
 
-        header { background: rgba(255, 255, 255, 0.8) !important; backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 1.5rem 5% !important; }
-        .logo { color: var(--text-main) !important; }
-        .nav-icons { color: var(--text-main); font-weight: 700; }
-        
-        .btn-vender-sidebar { width: 100%; margin-top: 20px; justify-content: center; background: var(--primary-gradient); color: white; border: none; padding: 18px; border-radius: 20px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: var(--transition); box-shadow: 0 10px 20px rgba(212, 20, 90, 0.2); }
-        .btn-vender-sidebar:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212, 20, 90, 0.3); }
-
-        @media (max-width: 1100px) {
+        @media (max-width: 1024px) {
             .marketplace-container { grid-template-columns: 1fr; }
             .filters-sidebar { display: none; }
         }
@@ -38,17 +84,27 @@
 </head>
 <body>
 
-    <header id="main-header">
-        <a href="../" class="logo" style="text-decoration: none;">
-            <div class="logo-circle">E</div>
-            <span>Plataforma <span class="gradient-text">Caribe</span></span>
-        </a>
-        <div class="nav-icons" style="display: flex; align-items: center; gap: 30px;">
-            <a href="../" style="text-decoration: none; color: inherit; font-size: 0.95rem;">Inicio</a>
-            <a href="#" style="text-decoration: none; color: var(--accent-orange); font-size: 0.95rem;">Marketplace</a>
-            <div class="cart-icon-wrapper" onclick="toggleCart()" style="position: relative; cursor: pointer;">
+    <!-- Header -->
+    <header id="main-header" style="background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid #eee;">
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="10" fill="url(#pc-logo-grad)"/>
+                <path d="M22 12C22 12 20 10 16 10C12 10 9 13.134 9 17C9 20.866 12 24 16 24C20 24 22 22 22 22" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <path d="M15 17L20 17" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <defs>
+                    <linearGradient id="pc-logo-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FF7E5F"/><stop offset="1" stop-color="#D4145A"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <a href="../index.html" style="text-decoration: none; color: inherit;">Plataforma <span class="gradient-text">Caribe</span></a>
+        </div>
+        <div class="nav-icons">
+            <a href="../index.html" style="text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 0.9rem; margin-right: 20px;">Inicio</a>
+            <i data-lucide="heart"></i>
+            <div class="cart-icon-wrapper" onclick="toggleCart()">
                 <i data-lucide="shopping-bag"></i>
-                <span id="cart-count" class="cart-badge" style="position: absolute; top: -8px; right: -8px; background: var(--primary-gradient); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; border: 2px solid white;">0</span>
+                <span id="cart-count" class="cart-badge">0</span>
             </div>
             <i data-lucide="menu"></i>
         </div>
@@ -58,110 +114,139 @@
         <aside class="filters-sidebar">
             <div class="filter-group">
                 <h3 class="filter-title">Categorías</h3>
-                <label class="filter-option"><input type="checkbox" checked> <span>Todos los productos</span></label>
+                <label class="filter-option"><input type="checkbox" checked> <span>Todos</span></label>
                 <label class="filter-option"><input type="checkbox"> <span>Tecnología</span></label>
-                <label class="filter-option"><input type="checkbox"> <span>Alimentos & Bebidas</span></label>
-                <label class="filter-option"><input type="checkbox"> <span>Moda Caribeña</span></label>
-                <label class="filter-option"><input type="checkbox"> <span>Artesanías locales</span></label>
+                <label class="filter-option"><input type="checkbox"> <span>Alimentos</span></label>
+                <label class="filter-option"><input type="checkbox"> <span>Moda</span></label>
+                <label class="filter-option"><input type="checkbox"> <span>Artesanías</span></label>
             </div>
 
             <div class="filter-group">
                 <h3 class="filter-title">Región</h3>
-                <label class="filter-option"><input type="checkbox"> <span>RACCS (Bluefields)</span></label>
-                <label class="filter-option"><input type="checkbox"> <span>RACCN (Bilwi)</span></label>
+                <label class="filter-option"><input type="checkbox"> <span>Bluefields</span></label>
+                <label class="filter-option"><input type="checkbox"> <span>Bilwi</span></label>
             </div>
 
             <div class="filter-group">
-                <h3 class="filter-title">Rango de Precio</h3>
-                <input type="range" style="width: 100%; margin-bottom: 15px; accent-color: var(--accent-orange);">
-                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">
+                <h3 class="filter-title">Precio</h3>
+                <input type="range" style="width: 100%; accent-color: var(--accent-orange);">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-top: 10px; font-weight: 700; color: var(--text-muted);">
                     <span>NIO 0</span>
-                    <span>NIO 10,000+</span>
+                    <span>NIO 10k+</span>
                 </div>
             </div>
 
-            <button class="btn-vender-sidebar" onclick="window.location.href='../register/'">
-                <i data-lucide="store"></i> Vender en Plataforma
-            </button>
+            <a href="../register/index.html" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 0.85rem;">
+                <i data-lucide="store" style="width: 16px;"></i> Vender aquí
+            </a>
         </aside>
 
         <main>
             <div class="marketplace-header">
                 <div>
-                    <h1>Todo el <span class="gradient-text">Caribe</span></h1>
-                    <p style="color: var(--text-muted); font-weight: 600; font-size: 1.1rem; margin-top: 5px;">Descubre productos auténticos y verificados.</p>
+                    <h1>Marketplace <span class="gradient-text">Caribe</span></h1>
+                    <p style="color: var(--text-muted); font-weight: 600;">Productos auténticos de nuestras regiones autónomas.</p>
                 </div>
                 <select class="sort-select">
-                    <option>Más relevantes</option>
-                    <option>Menor precio</option>
-                    <option>Mayor precio</option>
+                    <option>Más recientes</option>
+                    <option>Precio: Bajo a Alto</option>
+                    <option>Precio: Alto a Bajo</option>
                 </select>
             </div>
 
-            <div id="product-grid" class="product-grid">
-                <!-- Inyectado por JS -->
+            <!-- Global Grid - Shared with Main Page -->
+            <div id="product-grid-main" class="product-grid">
+                <!-- Injected by ProductService.js -->
             </div>
         </main>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); z-index: 1000; align-items: center; justify-content: center;">
+        <div class="modal-content" style="background: white; border-radius: 24px; width: 90%; max-width: 500px; overflow: hidden; position: relative;">
+            <button onclick="closeModal()" style="position: absolute; top: 15px; right: 15px; border: none; background: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="x" style="width: 20px;"></i>
+            </button>
+            <div id="modal-image" style="width: 100%; height: 250px; background: #eee;"></div>
+            <div style="padding: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                    <h2 id="modal-title" style="margin: 0; font-size: 1.5rem;"></h2>
+                    <span id="modal-price" style="font-weight: 700; color: var(--primary); font-size: 1.25rem;"></span>
+                </div>
+                <p id="modal-seller" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;"></p>
+                <div style="background: #F8FAFC; padding: 15px; border-radius: 12px; margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
+                        <i data-lucide="map-pin" style="width: 14px;"></i> <span id="modal-location"></span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 1px solid #E2E8F0;">
+                        <span style="font-size: 0.85rem; font-weight: 600;">Cantidad:</span>
+                        <div style="display: flex; align-items: center; gap: 15px; background: white; padding: 5px 12px; border-radius: 10px; border: 1px solid #E2E8F0;">
+                            <button onclick="changeQty(-1)" style="border:none; background:none; cursor:pointer; font-weight:700;">-</button>
+                            <span id="modal-qty" style="font-weight: 700; min-width: 20px; text-align: center;">1</span>
+                            <button onclick="changeQty(1)" style="border:none; background:none; cursor:pointer; font-weight:700;">+</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="confirmPurchase()" style="width: 100%; justify-content: center;">Añadir al Carrito</button>
+            </div>
+        </div>
     </div>
 
     <!-- Premium Cart Drawer -->
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-header">
             <h3>Tu Carrito</h3>
-            <button onclick="toggleCart()" class="close-cart"><i data-lucide="x" style="width: 24px;"></i></button>
+            <button onclick="toggleCart()" class="close-cart"><i data-lucide="x"></i></button>
         </div>
         <div id="cart-view" style="flex: 1; display: flex; flex-direction: column;">
-            <div id="cart-items" class="cart-items-container">
-                <!-- Items list -->
-            </div>
+            <div id="cart-items" class="cart-items-container"></div>
             <div class="cart-footer" id="cart-footer" style="display: none;">
                 <div class="cart-total">
-                    <span>Total del pedido</span>
-                    <span id="cart-total-amount">NIO 0</span>
+                    <span>Total estimado:</span>
+                    <span id="cart-total-price">NIO 0</span>
                 </div>
-                <button class="btn btn-primary" onclick="showCheckout()" style="width: 100%; justify-content: center; height: 60px; font-size: 1.1rem;">
-                    Proceder al Pago <i data-lucide="arrow-right" style="margin-left: 10px;"></i>
-                </button>
+                <button class="btn btn-primary" onclick="showCheckout()" style="width: 100%; justify-content: center;">Continuar al Pago</button>
             </div>
+        </div>
+        <div id="checkout-view" style="display: none; padding: 24px; flex-direction: column; gap: 20px;">
+            <button onclick="hideCheckout()" style="background: none; border: none; color: var(--primary); font-weight: 700; cursor: pointer;">← Volver</button>
+            <h3>Finalizar Compra</h3>
+            <div class="form-group">
+                <label>Dirección de Entrega</label>
+                <textarea id="checkout-address" placeholder="Ej: Barrio Santa Rosa..."></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="processCheckout()" style="width: 100%; justify-content: center;">Confirmar Pedido</button>
         </div>
     </div>
 
-    <script src="../script.js"></script>
-    <script>
-        lucide.createIcons();
+    <!-- Scripts -->
+    <script type="module">
+        import * as CartService from '../js/CartService.js';
+        import * as ProductService from '../js/ProductService.js';
+        import * as UIService from '../js/UIService.js';
+
+        // Expose to window
+        window.toggleCart = CartService.toggleCart;
+        window.openProductDetail = CartService.openProductDetail;
+        window.changeQty = CartService.changeQty;
+        window.closeModal = CartService.closeModal;
+        window.confirmPurchase = CartService.confirmPurchase;
+        window.removeFromCart = CartService.removeFromCart;
+        window.showCheckout = CartService.showCheckout;
+        window.hideCheckout = CartService.hideCheckout;
+        window.processCheckout = CartService.processCheckout;
+
         document.addEventListener('DOMContentLoaded', () => {
-            renderProducts();
-            updateCartUI();
-        });
-
-        function renderProducts() {
-            const grid = document.getElementById('product-grid');
-            const prods = [
-                { id: 1, name: "Café Gourmet Caribe", price: 450, seller: "Granos de Oro", location: "Bluefields", image: "/caribbean_coffee_product_1778800497641.png" },
-                { id: 2, name: "Artesanía en Coco", price: 320, seller: "Artesanos Bilwi", location: "Bilwi", image: "/media__1778799917034.jpg" },
-                { id: 3, name: "Vestido Tropical", price: 950, seller: "Modas Maritza", location: "Bilwi", image: "/media__1778800601810.jpg" },
-                { id: 4, name: "Chocolate Orgánico", price: 180, seller: "Cacao del Sur", location: "Bluefields", image: "/caribbean_hero_background_1778800043521.png" }
-            ];
-
-            grid.innerHTML = prods.map(p => `
-                <div class="product-card" onclick="window.location.href='/product/?name=${encodeURIComponent(p.name)}&price=${p.price}&seller=${encodeURIComponent(p.seller)}'">
-                    <div class="product-img">
-                        <img src="${p.image}">
-                        <div class="badge badge-new">NUEVO</div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-meta">
-                            <span><i data-lucide="map-pin" style="width:12px; vertical-align:middle; margin-right:4px;"></i>${p.location}</span>
-                            <span style="color:#fbbf24;"><i data-lucide="star" style="width:12px; fill:currentColor; vertical-align:middle; margin-right:4px;"></i>4.9</span>
-                        </div>
-                        <h3 class="product-title">${p.name}</h3>
-                        <p class="product-seller">por ${p.seller}</p>
-                        <div class="product-price">NIO ${p.price.toLocaleString()}</div>
-                    </div>
-                </div>
-            `).join('');
             lucide.createIcons();
-        }
+            UIService.initScrollEffects();
+            ProductService.renderSkeletons();
+            
+            // Fix image paths for subfolder if opening via file://
+            // Note: In a real app, ProductService would handle base paths.
+            setTimeout(() => {
+                ProductService.loadProducts();
+            }, 1500);
+        });
     </script>
 </body>
 </html>

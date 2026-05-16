@@ -390,3 +390,80 @@ input:focus {
     .page-header { flex-direction: column; align-items: flex-start; gap: 15px; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
 }
+/* Gamified Onboarding */
+.onboarding-banner {
+    background: white;
+    padding: 32px;
+    border-radius: 24px;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.onboarding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+}
+
+.onboarding-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.onboarding-steps {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.step-pill {
+    flex: 1;
+    height: 8px;
+    border-radius: 4px;
+    background: #F1F5F9;
+    position: relative;
+    transition: 0.3s;
+}
+
+.step-pill.completed { background: var(--success); }
+.step-pill.active { background: var(--primary); }
+.step-pill.active::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--primary);
+    border-radius: 4px;
+    animation: stepPulse 1.5s infinite;
+}
+
+@keyframes stepPulse {
+    0% { opacity: 0.6; transform: scaleX(1); }
+    100% { opacity: 0; transform: scaleX(1.05); }
+}
+
+.onboarding-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-top: 10px;
+    display: block;
+}
+
+/* Sparklines & Comparison */
+.stat-comparison {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sparkline-container {
+    height: 40px;
+    margin-top: 15px;
+}

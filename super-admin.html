@@ -13,18 +13,17 @@
     <aside class="sidebar">
         <div class="sidebar-logo">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
-                <path d="M10 10V22H22V20H12V10H10Z" fill="white"/>
-                <path d="M14 14V16H20V14H14Z" fill="white"/>
-                <path d="M14 18V20H22V18H14Z" fill="white"/>
+                <rect width="32" height="32" rx="10" fill="url(#pc-logo-grad-admin)"/>
+                <path d="M22 12C22 12 20 10 16 10C12 10 9 13.134 9 17C9 20.866 12 24 16 24C20 24 22 22 22 22" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <path d="M15 17L20 17" stroke="white" stroke-width="3" stroke-linecap="round"/>
                 <defs>
-                    <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                    <linearGradient id="pc-logo-grad-admin" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
                         <stop stop-color="#FF7E5F"/>
                         <stop offset="1" stop-color="#D4145A"/>
                     </linearGradient>
                 </defs>
             </svg>
-            <span>EternalLabs <span style="font-size: 0.7rem; background: var(--primary); padding: 2px 6px; border-radius: 4px; vertical-align: middle;">MASTER</span></span>
+            <span>Plataforma <span style="font-size: 0.7rem; background: var(--primary); padding: 2px 6px; border-radius: 4px; vertical-align: middle;">CARIBE</span></span>
         </div>
 
         <nav>
@@ -49,7 +48,19 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                 Pedidos
             </a>
+            <a href="#" class="nav-item" onclick="showSection('governance')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M12 2l-2 5h4l-2-5zM12 22l-2-5h4l-2 5z"/></svg>
+                Gobernanza
+            </a>
+            <a href="#" class="nav-item" onclick="showSection('cms')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 7v13"/></svg>
+                Contenido CMS
+            </a>
             <div style="height: 1px; background: rgba(255,255,255,0.1); margin: 20px 0;"></div>
+            <a href="#" class="nav-item" onclick="showSection('audit')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8M16 17H8M10 9H9H8"/></svg>
+                Auditoría Sistema
+            </a>
             <a href="#" class="nav-item" onclick="showSection('security')">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                 Seguridad
@@ -85,23 +96,23 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-label">Ventas Brutas (NIO)</div>
-                    <div id="stat-sales" class="stat-value">245,800</div>
-                    <div style="font-size: 0.7rem; color: var(--success); margin-top: 5px;">↑ 12.5% vs ayer</div>
+                    <div id="stat-sales" class="stat-value"><div class="skeleton skeleton-value"></div></div>
+                    <div id="stat-sales-trend" style="font-size: 0.7rem; color: var(--success); margin-top: 5px;">&nbsp;</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Negocios Activos</div>
-                    <div id="stat-businesses" class="stat-value">124</div>
-                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 5px;">+3 esta semana</div>
+                    <div id="stat-businesses" class="stat-value"><div class="skeleton skeleton-value"></div></div>
+                    <div id="stat-businesses-trend" style="font-size: 0.7rem; color: var(--text-muted); margin-top: 5px;">&nbsp;</div>
                 </div>
                 <div class="stat-card" style="border-left: 4px solid var(--danger);">
                     <div class="stat-label">Alertas de Fraude</div>
-                    <div id="stat-fraud" class="stat-value" style="color: var(--danger);">0</div>
-                    <div style="font-size: 0.7rem; color: var(--success); margin-top: 5px;">Protegido</div>
+                    <div id="stat-fraud" class="stat-value" style="color: var(--danger);"><div class="skeleton skeleton-value"></div></div>
+                    <div id="stat-fraud-trend" style="font-size: 0.7rem; color: var(--success); margin-top: 5px;">&nbsp;</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Usuarios Live</div>
-                    <div id="stat-users" class="stat-value">42</div>
-                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 5px;">En tiempo real</div>
+                    <div id="stat-users" class="stat-value"><div class="skeleton skeleton-value"></div></div>
+                    <div id="stat-users-trend" style="font-size: 0.7rem; color: var(--text-muted); margin-top: 5px;">&nbsp;</div>
                 </div>
             </div>
 
@@ -112,27 +123,41 @@
                         <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--dark);">Rendimiento de Ventas</h3>
                         <span style="font-size: 0.7rem; color: var(--success); background: rgba(16, 185, 129, 0.1); padding: 4px 8px; border-radius: 6px;">● Live</span>
                     </div>
-                    <div style="height: 220px;">
-                        <canvas id="mainChart"></canvas>
+                    <div id="chart-container-sales" style="height: 220px;">
+                        <div class="skeleton skeleton-chart"></div>
                     </div>
                 </div>
 
-                <!-- Regional Breakdown -->
-                <div style="background: white; padding: 24px; border-radius: 20px; box-shadow: var(--shadow-sm); border: 1px solid #F1F5F9;">
-                    <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--dark); margin-bottom: 20px;">Ventas por Región</h3>
-                    <div style="display: flex; align-items: center; gap: 20px; height: 220px;">
-                        <div style="width: 140px; height: 140px;">
-                            <canvas id="regionChart"></canvas>
+                <!-- Action Center (New) -->
+                <div class="action-center">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--dark);">Action Center</h3>
+                        <span class="badge-count">3</span>
+                    </div>
+                    <div class="action-list">
+                        <div class="action-item urgency-high" onclick="window.viewVerification('b2')">
+                            <div class="action-status"></div>
+                            <div class="action-info">
+                                <p class="action-title">Validación Pendiente: Puerto de Sabores</p>
+                                <span class="action-time">Hace 12 min</span>
+                            </div>
+                            <i data-lucide="chevron-right" style="width: 16px; opacity: 0.3;"></i>
                         </div>
-                        <div style="flex: 1; display: flex; flex-direction: column; gap: 12px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; background: var(--primary); border-radius: 2px;"></span> Bluefields</span>
-                                <span style="font-size: 0.75rem; font-weight: 700;">65%</span>
+                        <div class="action-item urgency-medium">
+                            <div class="action-status"></div>
+                            <div class="action-info">
+                                <p class="action-title">Stock Bajo: Granos de Oro (Café)</p>
+                                <span class="action-time">Hace 1 hora</span>
                             </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; background: var(--dark); border-radius: 2px;"></span> Bilwi</span>
-                                <span style="font-size: 0.75rem; font-weight: 700;">35%</span>
+                            <i data-lucide="chevron-right" style="width: 16px; opacity: 0.3;"></i>
+                        </div>
+                        <div class="action-item urgency-low">
+                            <div class="action-status"></div>
+                            <div class="action-info">
+                                <p class="action-title">Nuevo Ticket de Soporte #884</p>
+                                <span class="action-time">Hace 3 horas</span>
                             </div>
+                            <i data-lucide="chevron-right" style="width: 16px; opacity: 0.3;"></i>
                         </div>
                     </div>
                 </div>
@@ -146,106 +171,67 @@
                     <h1>Centro de Validación de Seguridad</h1>
                     <p style="color: var(--text-muted);">Análisis de identidad y prevención de fraude para nuevos negocios.</p>
                 </div>
-                <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.8rem;">
-                    Score de Seguridad: 98/100 (Alto)
+                <div style="display: flex; gap: 12px;">
+                    <button class="filter-btn active" onclick="showSection('businesses')">Volver al Listado</button>
+                    <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.8rem;">
+                        Score de Seguridad: 98/100 (Alto)
+                    </div>
                 </div>
             </div>
 
-            <div class="validation-grid" style="grid-template-columns: 1fr 380px;">
-                <div style="display: flex; flex-direction: column; gap: 24px;">
-                    <!-- Multi-Doc Viewer -->
-                    <div class="doc-viewer">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <h3 style="color: white; font-size: 0.9rem;">Documentos Enviados</h3>
-                            <div style="display: flex; gap: 8px;">
-                                <span style="font-size: 0.7rem; color: var(--success); background: rgba(16, 185, 129, 0.2); padding: 2px 8px; border-radius: 4px;">✔ Metadatos Válidos</span>
-                                <span style="font-size: 0.7rem; color: var(--success); background: rgba(16, 185, 129, 0.2); padding: 2px 8px; border-radius: 4px;">✔ Sin Manipulación Digital</span>
-                            </div>
+            <div class="validation-container">
+                <!-- Viewer Column -->
+                <div class="doc-viewer-card">
+                    <div class="viewer-header">
+                        <div class="doc-info">
+                            <h3 id="doc-title">Cédula de Identidad (Frontal)</h3>
+                            <span class="doc-badge">Privado • Cifrado AES-256</span>
                         </div>
-                        
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                            <div>
-                                <p style="color: rgba(255,255,255,0.5); font-size: 0.7rem; margin-bottom: 5px;">CÉDULA (FRONTAL)</p>
-                                <img src="mock_cedula_front_1778802267324.png" class="doc-img" alt="ID Document">
-                            </div>
-                            <div>
-                                <p style="color: rgba(255,255,255,0.5); font-size: 0.7rem; margin-bottom: 5px;">RUC / MATRÍCULA</p>
-                                <div style="aspect-ratio: 1.6; background: #1E293B; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.3);">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-                            <div>
-                                <h4 style="color: rgba(255,255,255,0.5); font-size: 0.7rem; text-transform: uppercase;">Propietario</h4>
-                                <p style="color: white; font-weight: 600;">Bayardo Porta</p>
-                            </div>
-                            <div>
-                                <h4 style="color: rgba(255,255,255,0.5); font-size: 0.7rem; text-transform: uppercase;">RUC</h4>
-                                <p style="color: white; font-weight: 600;">J0310000123456</p>
-                            </div>
-                            <div>
-                                <h4 style="color: rgba(255,255,255,0.5); font-size: 0.7rem; text-transform: uppercase;">Ciudad</h4>
-                                <p style="color: white; font-weight: 600;">Bluefields, NIC</p>
-                            </div>
+                        <div class="viewer-controls">
+                            <button class="control-btn" title="Girar" onclick="window.rotateDoc()"><i data-lucide="rotate-cw" style="width: 16px;"></i></button>
+                            <button class="control-btn" title="Zoom In" onclick="window.zoomDoc(1.2)"><i data-lucide="zoom-in" style="width: 16px;"></i></button>
+                            <button class="control-btn" title="Zoom Out" onclick="window.zoomDoc(0.8)"><i data-lucide="zoom-out" style="width: 16px;"></i></button>
                         </div>
                     </div>
-
-                    <!-- Business Details -->
-                    <div style="background: white; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-md);">
-                        <h3 style="font-size: 1rem; margin-bottom: 20px;">Información de Contacto Verificada</h3>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                            <div>
-                                <label>Teléfono</label>
-                                <p style="font-weight: 600; margin-top: 4px;">+505 8888-8888 <span style="color: var(--success); font-size: 0.7rem;">(SMS Verificado)</span></p>
-                            </div>
-                            <div>
-                                <label>Email</label>
-                                <p style="font-weight: 600; margin-top: 4px;">bayardo@puertosabores.com <span style="color: var(--success); font-size: 0.7rem;">(Confirmado)</span></p>
-                            </div>
+                    <div class="viewer-body">
+                        <div id="doc-canvas" class="doc-canvas">
+                            <img id="audit-image" src="mock_cedula_front_1778802267324.png" alt="Documento">
                         </div>
                     </div>
                 </div>
-                
-                <div class="validation-actions">
-                    <!-- Manual Security Checklist -->
-                    <div style="background: #0F172A; color: white; padding: 24px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); margin-bottom: 20px;">
-                        <h3 style="font-size: 0.8rem; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-                            Lista de Verificación
-                        </h3>
-                        <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); display: flex; flex-direction: column; gap: 10px;">
-                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: white;">
-                                <input type="checkbox" style="width: auto;"> Cédula coincide con nombre
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: white;">
-                                <input type="checkbox" style="width: auto;"> RUC vigente y válido
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: white;">
-                                <input type="checkbox" style="width: auto;"> Foto coincide con propietario
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: white;">
-                                <input type="checkbox" style="width: auto;"> Negocio ubicado en el Caribe
-                            </label>
+
+                <!-- Decision Column -->
+                <div class="decision-card">
+                    <h3 style="font-size: 1rem; margin-bottom: 20px;">Veredicto de Auditoría</h3>
+                    
+                    <div class="checklist">
+                        <div class="check-item">
+                            <input type="checkbox" id="check-id">
+                            <label for="check-id">Identidad coincide con el perfil</label>
+                        </div>
+                        <div class="check-item">
+                            <input type="checkbox" id="check-exp">
+                            <label for="check-id">Documento vigente (no expirado)</label>
+                        </div>
+                        <div class="check-item">
+                            <input type="checkbox" id="check-qual">
+                            <label for="check-id">Calidad de imagen legible</label>
                         </div>
                     </div>
 
-                    <button class="btn-action btn-approve" onclick="approveBusiness()">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Aprobar Vendedor
-                    </button>
-                    <button class="btn-action btn-reject" onclick="rejectBusiness()">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                        Bloquear Registro
-                    </button>
-                    <button class="btn-action btn-info" onclick="investigateMore()">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                        Investigar Más
-                    </button>
-                    
-                    <div style="margin-top: 10px; font-size: 0.7rem; color: var(--text-muted); text-align: center;">
-                        Sesión de Admin: <strong>Admin_Master_01</strong>
+                    <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 12px;">
+                        <button class="btn-master btn-approve" onclick="window.approveBusiness()">
+                            <i data-lucide="check-circle" style="width: 18px;"></i> Aprobar Negocio
+                        </button>
+                        <button class="btn-master btn-reject" onclick="window.rejectBusiness()">
+                            <i data-lucide="x-circle" style="width: 18px;"></i> Rechazar con Observaciones
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid #eee;">
+                        <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
+                            * Al aprobar este negocio, se habilitará automáticamente su capacidad de publicar productos en el marketplace.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -267,23 +253,9 @@
                         <th>Acción</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr id="row-tecnocaribe">
-                        <td><strong>TecnoCaribe</strong></td>
-                        <td>Juan Carlos</td>
-                        <td>Bluefields</td>
-                        <td>NIO 45,000</td>
-                        <td><span class="status-tag status-verified">Verificado</span></td>
-                        <td><button style="border: none; background: transparent; cursor: pointer; color: var(--info); font-weight: 700;" onclick="viewBusinessDetail('TecnoCaribe')">Ver Detalle</button></td>
-                    </tr>
-                    <tr id="row-puerto-sabores">
-                        <td><strong>Puerto de Sabores</strong></td>
-                        <td>Bayardo Porta</td>
-                        <td>Bluefields</td>
-                        <td>NIO 0</td>
-                        <td><span id="status-puerto" class="status-tag status-pending">Pendiente</span></td>
-                        <td><button id="btn-revisar-puerto" style="border: none; background: transparent; cursor: pointer; color: var(--info); font-weight: 700;" onclick="showSection('validation')">Revisar</button></td>
-                    </tr>
+                <tbody id="business-table-body">
+                    <tr><td colspan="6"><div class="skeleton skeleton-table-row"></div></td></tr>
+                    <tr><td colspan="6"><div class="skeleton skeleton-table-row"></div></td></tr>
                 </tbody>
             </table>
         </section>
@@ -364,6 +336,94 @@
             </table>
         </section>
 
+        <!-- Section: Governance & Commissions -->
+        <section id="section-governance" class="hidden">
+            <div class="page-header">
+                <h1>Gobernanza del Ecosistema</h1>
+                <p style="color: var(--text-muted);">Define las reglas económicas y la taxonomía del marketplace.</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="content-card">
+                    <h3 class="card-title">Gestión de Comisiones por Categoría</h3>
+                    <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 12px;">
+                            <span>Alimentos y Bebidas</span>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="number" value="10" style="width: 70px; padding: 6px;"> %
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 12px;">
+                            <span>Tecnología y Gadgets</span>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="number" value="15" style="width: 70px; padding: 6px;"> %
+                            </div>
+                        </div>
+                        <button class="btn-action btn-approve" style="margin-top: 10px;">Guardar Cambios Económicos</button>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="card-title">Taxonomía (Categorías Globales)</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; background: #f8fafc; padding: 10px 15px; border-radius: 8px;">
+                            <span>Artesanías</span>
+                            <button style="color: var(--danger); border: none; background: none;">Eliminar</button>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; background: #f8fafc; padding: 10px 15px; border-radius: 8px;">
+                            <span>Moda y Ropa</span>
+                            <button style="color: var(--danger); border: none; background: none;">Eliminar</button>
+                        </div>
+                        <button class="btn-action btn-info">+ Nueva Categoría</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Content Management (CMS) -->
+        <section id="section-cms" class="hidden">
+            <div class="page-header">
+                <h1>Gestión de Contenido (CMS)</h1>
+            </div>
+            <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="content-card">
+                    <h3 class="card-title">Banners del Home</h3>
+                    <div style="margin-top: 20px; border: 2px dashed #eee; padding: 30px; text-align: center; border-radius: 12px;">
+                        <p style="color: var(--text-muted);">Arrastra aquí el nuevo banner (1200x400px)</p>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div style="display: flex; align-items: center; gap: 15px; padding: 10px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px;">
+                            <div style="width: 60px; height: 30px; background: #ccc; border-radius: 4px;"></div>
+                            <span style="flex: 1; font-size: 0.8rem;">Promo Verano Caribeño</span>
+                            <span class="status-tag status-verified">Activo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <h3 class="card-title">Noticias y Blog</h3>
+                    <button class="btn-action btn-info" style="margin-bottom: 20px;">Redactar Noticia</button>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">
+                        No hay artículos publicados.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Audit System Logs -->
+        <section id="section-audit" class="hidden">
+            <div class="page-header">
+                <h1>Logs de Auditoría Administrativa</h1>
+                <p style="color: var(--text-muted);">Historial de todas las acciones realizadas por los administradores.</p>
+            </div>
+            <div class="content-card" style="background: #0F172A; color: #94A3B8; font-family: monospace; font-size: 0.8rem; padding: 30px; border-radius: 20px;">
+                <div id="admin-audit-logs">
+                    <div style="margin-bottom: 10px;">[2026-05-16 14:20] <span style="color: #60A5FA;">ADMIN_MASTER_01</span> aprobó el negocio "Puerto de Sabores" (ID: b2)</div>
+                    <div style="margin-bottom: 10px;">[2026-05-16 12:15] <span style="color: #60A5FA;">SYSTEM</span> actualizó la comisión de Tecnología a 15%</div>
+                    <div style="margin-bottom: 10px;">[2026-05-15 18:42] <span style="color: #F87171;">SECURITY</span> bloqueó IP 190.212.44.12 por sospecha de fuerza bruta</div>
+                </div>
+            </div>
+        </section>
+
         <!-- Section: Security & Fraud -->
         <section id="section-security" class="hidden">
             <div class="page-header">
@@ -432,6 +492,6 @@
     <!-- Toast Notifications -->
     <div id="toast-container" class="toast-container"></div>
 
-    <script src="super-admin.js"></script>
+    <script type="module" src="js/AdminMain.js"></script>
 </body>
 </html>

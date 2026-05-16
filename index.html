@@ -17,7 +17,17 @@
     <!-- Header -->
     <header id="main-header">
         <div class="logo">
-            <div class="logo-circle">E</div>
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="10" fill="url(#pc-logo-grad)"/>
+                <path d="M22 12C22 12 20 10 16 10C12 10 9 13.134 9 17C9 20.866 12 24 16 24C20 24 22 22 22 22" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <path d="M15 17L20 17" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <defs>
+                    <linearGradient id="pc-logo-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FF7E5F"/>
+                        <stop offset="1" stop-color="#D4145A"/>
+                    </linearGradient>
+                </defs>
+            </svg>
             <span>Plataforma <span class="gradient-text">Caribe</span></span>
         </div>
         <div class="nav-icons">
@@ -40,8 +50,8 @@
             <p>Compra a negocios verificados con pago contra entrega o billetera móvil Banpro. Adiós a las estafas en grupos de Facebook.</p>
             
             <div class="hero-btns">
-                <a href="marketplace/" class="btn btn-primary">Explorar productos <i data-lucide="arrow-right"></i></a>
-                <a href="register/" class="btn btn-outline">Vender en Plataforma</a>
+                <a href="marketplace/index.html" class="btn btn-primary">Explorar productos <i data-lucide="arrow-right"></i></a>
+                <a href="register/index.html" class="btn btn-outline">Vender en Plataforma</a>
             </div>
 
             <div class="hero-features">
@@ -81,61 +91,8 @@
             <a href="#" class="view-all">Ver todo <i data-lucide="arrow-right"></i></a>
         </div>
 
-        <div class="product-grid">
-            <!-- Product 1 -->
-            <div class="product-card" onclick="openProductDetail('Audífonos Inalámbricos Pro', 'NIO 1,850', 'TecnoCaribe', 'Bluefields', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600')">
-                <div class="product-img">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600" alt="Audífonos">
-                    <div class="badge badge-discount">-23%</div>
-                    <div class="wishlist-btn"><i data-lucide="heart"></i></div>
-                </div>
-                <div class="product-info">
-                    <div class="product-meta">
-                        <span class="product-location"><i data-lucide="map-pin"></i> Bluefields</span>
-                        <span class="product-rating"><i data-lucide="star"></i> 4.8</span>
-                    </div>
-                    <h3 class="product-title">Audífonos Inalámbricos Pro</h3>
-                    <p class="product-seller">por TecnoCaribe</p>
-                    <div class="product-price">
-                        NIO 1,850 <span class="old-price">NIO 2,400</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 2 -->
-            <div class="product-card" onclick="openProductDetail('Vestido Tropical Estampado', 'NIO 950', 'Modas Maritza', 'Bilwi', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600')">
-                <div class="product-img">
-                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600" alt="Vestido">
-                    <div class="wishlist-btn"><i data-lucide="heart"></i></div>
-                </div>
-                <div class="product-info">
-                    <div class="product-meta">
-                        <span class="product-location"><i data-lucide="map-pin"></i> Bilwi</span>
-                        <span class="product-rating"><i data-lucide="star"></i> 4.9</span>
-                    </div>
-                    <h3 class="product-title">Vestido Tropical Estampado</h3>
-                    <p class="product-seller">por Modas Maritza</p>
-                    <div class="product-price">NIO 950</div>
-                </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="product-card" onclick="openProductDetail('Café Gourmet del Caribe', 'NIO 450', 'Granos de Oro', 'Bluefields', 'caribbean_coffee_product_1778800497641.png')">
-                <div class="product-img">
-                    <img src="caribbean_coffee_product_1778800497641.png" alt="Café del Caribe">
-                    <div class="badge badge-new">NUEVO</div>
-                    <div class="wishlist-btn"><i data-lucide="heart"></i></div>
-                </div>
-                <div class="product-info">
-                    <div class="product-meta">
-                        <span class="product-location"><i data-lucide="map-pin"></i> Bluefields</span>
-                        <span class="product-rating"><i data-lucide="star"></i> 5.0</span>
-                    </div>
-                    <h3 class="product-title">Café Gourmet del Caribe</h3>
-                    <p class="product-seller">por Granos de Oro</p>
-                    <div class="product-price">NIO 450</div>
-                </div>
-            </div>
+        <div class="product-grid" id="product-grid-main">
+            <!-- Skeletons will be injected here, then replaced by products -->
         </div>
     </section>
 
@@ -177,7 +134,17 @@
         <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
             <div>
                 <div class="logo" style="margin-bottom: 20px;">
-                    <div class="logo-circle">E</div>
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="10" fill="url(#pc-logo-grad-footer)"/>
+                        <path d="M22 12C22 12 20 10 16 10C12 10 9 13.134 9 17C9 20.866 12 24 16 24C20 24 22 22 22 22" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M15 17L20 17" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="pc-logo-grad-footer" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FF7E5F"/>
+                                <stop offset="1" stop-color="#D4145A"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                     <span>Plataforma <span class="gradient-text">Caribe</span></span>
                 </div>
                 <p style="opacity: 0.7; max-width: 300px;">El primer marketplace dedicado exclusivamente al Caribe Nicaragüense.</p>
@@ -194,8 +161,8 @@
                 <div>
                     <h4 style="margin-bottom: 15px;">Gestión</h4>
                     <ul style="list-style: none; opacity: 0.7; line-height: 2;">
-                        <li><a href="seller/" style="color: white; text-decoration: none;">Panel de Vendedor</a></li>
-                        <li><a href="admin/" style="color: white; text-decoration: none;">Super Admin</a></li>
+                        <li><a href="seller/index.html" style="color: white; text-decoration: none;">Panel de Vendedor</a></li>
+                        <li><a href="admin/index.html" style="color: white; text-decoration: none;">Super Admin</a></li>
                     </ul>
                 </div>
             </div>
@@ -343,9 +310,9 @@
     </div>
 
 
-    <script src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
     <script>
-        // Initialize icons
+        // Lucide is still global via script tag
         lucide.createIcons();
     </script>
 </body>
